@@ -16,7 +16,7 @@ const client = new Discord.Client();
  * received from Discord
  */
 client.on('ready', () => {
-  client.user.setPresence({ game: { name: 'bola na praia' } });
+  client.user.setGame(`Bola na praia`);
   console.log('I am ready to work!');
 });
 
