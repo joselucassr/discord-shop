@@ -6,6 +6,7 @@
 
 // Import the discord.js module
 const Discord = require('discord.js');
+const config = require('./config.json');
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
@@ -15,19 +16,20 @@ const client = new Discord.Client();
  * received from Discord
  */
 client.on('ready', () => {
-  console.log('I am ready!');
+  client.user.setPresence({ game: { name: 'bola na praia' } });
+  console.log('I am ready to work!');
 });
 
 client.on('message', async (message) => {
   if (message.author.bot) return;
 
-  // const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  // const comando = args.shift().toLocaleLowerCase();
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const comando = args.shift().toLocaleLowerCase();
 
-  if (message.content === 'ping') {
+  if (comando === 'ping') {
     const m = await message.channel.send('ping?');
     m.edit(
-      `pong!! A letencia é de ${
+      `pong!! A latência é de ${
         m.createdTimestamp - message.createdTimestamp
       }ms.`,
     );
