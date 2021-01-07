@@ -16,7 +16,14 @@ const client = new Discord.Client();
  * received from Discord
  */
 client.on('ready', () => {
-  client.user.setGame(`Bola na praia`);
+  bot.user.setPresence({
+    status: 'online',
+    activity: {
+      name: 'bola na praia',
+      type: 'STREAMING',
+      url: 'https://www.twitch.tv/monstercat',
+    },
+  });
   console.log('I am ready to work!');
 });
 
