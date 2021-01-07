@@ -18,17 +18,19 @@ client.on('ready', () => {
   console.log('I am ready!');
 });
 
-// Create an event listener for messages
-client.on('message', (message) => {
-  const args = message.content.slice(config.prefix.lenght).trim().split(/ +/g);
+client.on('message', async (message) => {
+  if (message.author.bot) return;
+
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const comando = args.shift().toLocaleLowerCase();
 
   if (comando === 'ping') {
-    const args = message.content
-      .slice(config.prefix.lenght)
-      .trim()
-      .split(/ +/g);
-    const comando = args.shift().toLocaleLowerCase();
+    const m = await message.channel.send('ping?');
+    m.edit(
+      `pong!! A letencia é de ${
+        m.createdTimestamp - message.createdTimestamp
+      }ms.`,
+    );
   }
 });
 
