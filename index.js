@@ -21,10 +21,10 @@ client.on('ready', () => {
 client.on('message', async (message) => {
   if (message.author.bot) return;
 
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const comando = args.shift().toLocaleLowerCase();
+  // const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  // const comando = args.shift().toLocaleLowerCase();
 
-  if (comando === 'ping') {
+  if (message.content === 'ping') {
     const m = await message.channel.send('ping?');
     m.edit(
       `pong!! A letencia é de ${
