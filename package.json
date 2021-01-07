@@ -1,5 +1,5 @@
 {
-  "name": "discordshop",
+  "name": "event-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joselucassr/discord-shop.git"
+    "url": "git+https://github.com/joselucassr/event-bot.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/joselucassr/discord-shop/issues"
+    "url": "https://github.com/joselucassr/event-bot/issues"
   },
-  "homepage": "https://github.com/joselucassr/discord-shop#readme",
+  "homepage": "https://github.com/joselucassr/event-bot#readme",
   "dependencies": {
     "add": "^2.0.6",
     "discord.js": "^12.5.1"
