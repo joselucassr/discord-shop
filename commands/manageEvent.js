@@ -44,8 +44,11 @@ const stopEvent = async () => {
 
     if (!activeEvent) return 'noEvent';
 
-    activeEvent.event_is_active = false;
-    await activeEvent.save();
+    await Event.findOneAndUpdate(
+      { _id: activeEvent._id },
+      { $set: { event_is_active: false } },
+      { new: true },
+    );
 
     return {
       eventName: activeEvent.event_name,
