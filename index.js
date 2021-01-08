@@ -103,9 +103,11 @@ client.on('message', async (msg) => {
       }
 
       await msg.channel.send(
-        `Evento: "${checkReturn.eventName}" 
-         Membros: ${checkReturn.memberCount}
-         Recebendo resposta: ${checkReturn.acceptMsg}`,
+        `
+        Evento: "${checkReturn.eventName}" 
+        Membros: ${checkReturn.memberCount}
+        Recebendo resposta: ${checkReturn.acceptMsg}
+        `,
       );
       break;
     }
