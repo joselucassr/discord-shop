@@ -127,7 +127,7 @@ client.on('message', async (msg) => {
             .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
             .setColor('#4affea');
           
-          destination.send(msg.content);
+          destination.send(embed);
         }
 
         counter++;
