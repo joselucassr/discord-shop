@@ -115,14 +115,14 @@ client.on('message', async (msg) => {
       collector.on('collect', (msg, col) => {
         console.log(`mensagem coletada: ${msg.content}`);
         if (destination) {
-          let embed = new Discord.RichEmbed()
+ /*      let embed = new Discord.RichEmbed()
             .setTitle('nova mensagem')
             .setDescription(msg.content)
             .setTimestamp()
             .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
-            .setColor('#4affea');
+            .setColor('#4affea');*/
 
-          destination.send(embed);
+          destination.send(msg.content);
         }
 
         counter++;
