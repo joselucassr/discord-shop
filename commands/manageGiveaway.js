@@ -34,6 +34,7 @@ exports.run = async (Client, Message, args) => {
         started_time_duration_start.split('m')[0],
       );
       time_duration = started_time_duration_start * 60000;
+      console.log(time_duration);
       if (time_duration < 3600000) {
         time_length = 'minutos';
       }
