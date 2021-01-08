@@ -131,6 +131,7 @@ const getAnswers = async (msg, client) => {
       .setTitle('nova mensagem')
       .setDescription(msg.content)
       .setImage(msg.attachments.first() && msg.attachments.first().url)
+      .setURL(msg.attachments.first() && msg.attachments.first().url)
       .setTimestamp()
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
       .setColor('#4affea');
