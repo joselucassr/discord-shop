@@ -9,7 +9,11 @@ const Discord = require('discord.js');
 const config = require('config');
 
 // Import commands
-const { createEvent, checkEvent } = require('./commands/manageEvent');
+const {
+  createEvent,
+  checkEvent,
+  stopEvent,
+} = require('./commands/manageEvent');
 
 // Define things
 const prefix = config.get('prefix');
@@ -95,7 +99,7 @@ client.on('message', async (msg) => {
       break;
     }
     case 'stop_event': {
-      const checkReturn = await checkEvent();
+      const checkReturn = await stopEvent();
 
       if (checkReturn === 'noEvent') {
         return msg.channel.send(`Não existe um evento em andamento`);
@@ -113,10 +117,16 @@ client.on('message', async (msg) => {
       let collector = new Discord.MessageCollector(msg.channel, filter);
       let destination = client.channels.get('796946980843945984')
       collector.on('collect', (msg, col) => {
+<<<<<<< HEAD
         console.log(`mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`);
 
       if(destination) {
         let embed = new Discord.RichEmbed()
+=======
+        console.log(`mensagem coletada: ${msg.content}`);
+        if (destination) {
+          let embed = new Discord.RichEmbed()
+>>>>>>> 2016cc8034b20166498c75c83108cb6a981595b9
             .setTitle('nova mensagem')
             .setDescription(msg.content)
             .setTimestamp()
