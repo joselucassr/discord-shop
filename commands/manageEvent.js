@@ -165,7 +165,7 @@ const getMembers = async () => {
     list = list + `<@${membersIn[i]}>\n`;
   }
 
-  return { list, isActive: event.event_is_active, name: event.name };
+  return { list, isActive: event.event_is_active, name: event.event_name };
 };
 
 module.exports = {
