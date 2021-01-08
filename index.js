@@ -14,6 +14,7 @@ const {
   checkEvent,
   stopEvent,
   joinEvent,
+  askMembers,
 } = require('./commands/manageEvent');
 
 // Define things
