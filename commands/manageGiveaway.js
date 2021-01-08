@@ -75,7 +75,7 @@ exports.run = async (Client, Message, args) => {
         let guildMembers = msg.reactions.cache.get('🎉').users;
         let winner =
           guildMembers[
-            Math.floor(Math.random() * Math.floor(guildMembers.length)).user.id
+            Math.floor(Math.random() * Math.floor(guildMembers.length))
           ];
 
         if (msg.reactions.cache.get('🎉').users.cache.size < 1) {
