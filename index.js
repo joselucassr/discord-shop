@@ -119,7 +119,7 @@ client.on('message', async (msg) => {
         return msg.channel.send(`Não existe um evento em andamento`);
       }
 
-      await msg.channel.send(`@${msg.author.tag} entrou!`);
+      await msg.channel.send(`<@${msg.author.id}> entrou!`);
       break;
     }
     case 'copyto':
