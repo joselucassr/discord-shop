@@ -33,8 +33,7 @@ exports.run = async (Client, Message, args) => {
       started_time_duration = parseInt(
         started_time_duration_start.split('m')[0],
       );
-      time_duration = started_time_duration_start * 60000;
-      console.log(time_duration);
+      time_duration = started_time_duration * 60000;
       if (time_duration < 3600000) {
         time_length = 'minutos';
       }
@@ -70,6 +69,7 @@ exports.run = async (Client, Message, args) => {
       .send(':tada: **SORTEIO** :tada:', embed);
     await msg.react('🎉'); // check if it works
     setTimeout(() => {
+      console.log(msg);
       msg.reaction.cache.get('🎉').users.remove(Client.user.id);
       setTimeout(() => {
         let guildMembers = msg.reactions.cache.get('🎉').users;
