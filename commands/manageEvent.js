@@ -98,32 +98,26 @@ const askMembers = async (users, askContent, client) => {
   }
 };
 
-const getAnswers = async (user, client) => {
-  let counter = 0;
-  let filter = (m) => !m.author.bot;
-  let collector = new Discord.MessageCollector(user, filter);
+const getAnswers = async (msg) => {
+  // Check for active events
+  const activeEvent = await Event.findOne({ event_is_active: true });
+
+  if (!activeEvent) return 'noEvent';
+
+  if (!activeEvent.members_ids.includes(msg.author.id)) return 'null';
+
   let destination = client.channels.cache.get('796946980843945984');
-  collector.on('collect', (msg, col) => {
-    console.log(
-      `mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`,
-    );
 
-    if (destination) {
-      let embed = new Discord.MessageEmbed()
-        .setTitle('nova mensagem')
-        .setDescription(msg.content)
-        .setTimestamp()
-        .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
-        .setColor('#4affea');
+  if (destination) {
+    let embed = new Discord.MessageEmbed()
+      .setTitle('nova mensagem')
+      .setDescription(msg.content)
+      .setTimestamp()
+      .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
+      .setColor('#4affea');
 
-      destination.send(embed);
-    }
-
-    counter++;
-    if (counter === 2) {
-      collector.stop();
-    }
-  });
+    await destination.send(embed);
+  }
 };
 
 module.exports = {
@@ -132,4 +126,5 @@ module.exports = {
   stopEvent,
   joinEvent,
   askMembers,
+  getAnswers,
 };

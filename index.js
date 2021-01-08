@@ -15,6 +15,7 @@ const {
   stopEvent,
   joinEvent,
   askMembers,
+  getAnswers,
 } = require('./commands/manageEvent');
 
 // Define things
@@ -49,6 +50,11 @@ client.on('message', async (msg) => {
 
   const args = msg.content.slice(prefix.length).trim().split(/ +/g);
   const comando = args.shift().toLocaleLowerCase();
+
+  // To get users answers
+  if (msg.channel.type === 'dm') {
+    getAnswers(msg);
+  }
 
   switch (comando) {
     case 'ping':
