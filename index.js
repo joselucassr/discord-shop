@@ -52,6 +52,7 @@ client.on('message', async (msg) => {
   const comando = args.shift().toLocaleLowerCase();
 
   // To get users answers
+  console.log(msg.channel.type);
   if (msg.channel.type === 'dm') {
     console.log('entrou pra pedir a função');
     await getAnswers(msg, client);
