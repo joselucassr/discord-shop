@@ -208,9 +208,9 @@ client.on('message', async (msg) => {
         let embed = new Discord.MessageEmbed()
             .setTitle('nova mensagem')
 
-            .setDescription('o prefixo do bot é e!' + /n +'ping (ping do bot)' + /n  + 'e! checar (checa o evento atual)' + /n + 'e!create (cria um novo evento)' 
-            + /n + 'e!stop_event (para o evneto atual)' + /n + 'e!entrar (comando para entrar no evento'
-            + /n + 'e!ask ( faz uma pergunta no privado dos usuarios, use aspas)' + /n + 'e!stop_ask (o bot para de receber respostas)'  )
+            .setDescription(`o prefixo do bot é e!` + /n +`ping (ping do bot)` + /n  + `e! checar (checa o evento atual)` + /n + `e!create (cria um novo evento)` 
+            + /n + `e!stop_event (para o evneto atual)` + /n + `e!entrar (comando para entrar no evento`
+            + /n + `e!ask ( faz uma pergunta no privado dos usuarios, use aspas)` + /n + `e!stop_ask (o bot para de receber respostas)` )
 
             //zé me disculpe pela maneira porca de fazer, tenho vergonha desse codigo, mas foi oq deu pra fazer, 
             //eu estava com mt sono e com preguiça
