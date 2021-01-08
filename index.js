@@ -8,7 +8,12 @@
 const Discord = require('discord.js');
 const config = require('config');
 
+// Define things
 const prefix = config.get('prefix');
+
+// Database
+const connectDB = require('./config/db');
+connectDB();
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
@@ -34,13 +39,16 @@ client.on('message', async (message) => {
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const comando = args.shift().toLocaleLowerCase();
 
-  if (comando === 'ping') {
-    const m = await message.channel.send('ping?');
-    m.edit(
-      `pong!! A latência é de ${
-        m.createdTimestamp - message.createdTimestamp
-      }ms.`,
-    );
+  switch (comando) {
+    case 'ping':
+      const m = await message.channel.send('ping?');
+      m.edit(
+        `pong!! A latência é de ${
+          m.createdTimestamp - message.createdTimestamp
+        }ms.`,
+      );
+    default:
+      await message.channel.send('Comando não encontrado');
   }
 });
 
