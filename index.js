@@ -156,9 +156,8 @@ client.on('message', async (msg) => {
 
       break;
 
-      case "ask":{ 
-        console.log (client.users.fetch('292092550863388674'))
-        const testeuser = await client.users.fetch('292092550863388674')
+      case "ask":{
+        const testeuser = await client.users.fetch('292092550863388674', true)
         await testeuser.send('Blabla')
         }
         break;
