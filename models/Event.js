@@ -14,6 +14,10 @@ const EventSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  event_accept_msg: {
+    type: Boolean,
+    default: false,
+  },
   event_created_at: {
     type: Date,
     default: Date.now,

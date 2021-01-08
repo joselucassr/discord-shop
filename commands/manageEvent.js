@@ -91,6 +91,8 @@ const askMembers = async (users, askContent, client) => {
       await user.send(askContent);
     }
 
+    activeEvent.event_accept_msg = true;
+    await activeEvent.save();
     return 'allSent';
   } catch (err) {
     console.error(err.message);
@@ -119,6 +121,18 @@ const getAnswers = async (msg, client) => {
   }
 };
 
+const stopAnswers = async () => {
+  // Check for active events
+  const activeEvent = await Event.findOne({ event_is_active: true });
+
+  if (!activeEvent) return 'noEvent';
+
+  activeEvent.event_accept_msg = true;
+  await activeEvent.save();
+
+  return 'stopped';
+};
+
 module.exports = {
   createEvent,
   checkEvent,
@@ -126,4 +140,5 @@ module.exports = {
   joinEvent,
   askMembers,
   getAnswers,
+  stopAnswers,
 };

@@ -16,6 +16,7 @@ const {
   joinEvent,
   askMembers,
   getAnswers,
+  stopAnswers,
 } = require('./commands/manageEvent');
 
 // Define things
@@ -184,7 +185,22 @@ client.on('message', async (msg) => {
         }
 
         if (checkReturn === 'allSent') {
-          return msg.channel.send(`Mensagem enviada a todos`);
+          return msg.channel.send(
+            `Mensagem enviada a todos, recebendo respostas`,
+          );
+        }
+      }
+      break;
+    case 'stop_ask':
+      {
+        const checkReturn = await stopAnswers();
+
+        if (checkReturn === 'noEvent') {
+          return msg.channel.send(`Não existe um evento em andamento`);
+        }
+
+        if (checkReturn === 'stopped') {
+          return msg.channel.send(`Receber respostas: Ligado`);
         }
       }
       break;
