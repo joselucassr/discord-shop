@@ -95,7 +95,7 @@ client.on('message', async (msg) => {
       break;
     }
     case 'stop_event': {
-      const checkReturn = await checkEvent();
+      const checkReturn = await stopEvent();
 
       if (checkReturn === 'noEvent') {
         return msg.channel.send(`Não existe um evento em andamento`);
@@ -115,7 +115,7 @@ client.on('message', async (msg) => {
       collector.on('collect', (msg, col) => {
         console.log(`mensagem coletada: ${msg.content}`);
         if (destination) {
-        let embed = new Discord.RichEmbed()
+          let embed = new Discord.RichEmbed()
             .setTitle('nova mensagem')
             .setDescription(msg.content)
             .setTimestamp()

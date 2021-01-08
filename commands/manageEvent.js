@@ -39,21 +39,13 @@ const checkEvent = async () => {
 
 const stopEvent = async () => {
   try {
-    console.log('Entrou no stopEvent');
     // Check for active events
     const activeEvent = await Event.findOne({ event_is_active: true });
 
     if (!activeEvent) return 'noEvent';
 
-    console.log(activeEvent);
-    console.log(activeEvent._id);
-    const savedEvent = await Event.findOneAndUpdate(
-      { _id: activeEvent._id },
-      { $set: { event_is_active: false } },
-      { new: true },
-    );
-
-    console.log(savedEvent);
+    activeEvent.event_is_active = false;
+    await activeEvent.save();
 
     return {
       eventName: activeEvent.event_name,
