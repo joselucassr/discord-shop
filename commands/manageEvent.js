@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 // Models import
 const Event = require('../models/Event');
 
@@ -74,7 +76,7 @@ const joinEvent = async (discord_id) => {
   }
 };
 
-const askMembers = async (users, askContent) => {
+const askMembers = async (users, askContent, client) => {
   try {
     // Check for active events
     const activeEvent = await Event.findOne({ event_is_active: true });
@@ -87,12 +89,41 @@ const askMembers = async (users, askContent) => {
       const user = await users.fetch(membersIds[i], true);
 
       await user.send(askContent);
+      getAnswers(user, client);
     }
 
     return 'allSent';
   } catch (err) {
     console.error(err.message);
   }
+};
+
+const getAnswers = async (user, client) => {
+  let counter = 0;
+  let filter = (m) => !m.author.bot;
+  let collector = new Discord.MessageCollector(user, filter);
+  let destination = client.channels.cache.get('796946980843945984');
+  collector.on('collect', (msg, col) => {
+    console.log(
+      `mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`,
+    );
+
+    if (destination) {
+      let embed = new Discord.MessageEmbed()
+        .setTitle('nova mensagem')
+        .setDescription(msg.content)
+        .setTimestamp()
+        .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
+        .setColor('#4affea');
+
+      destination.send(embed);
+    }
+
+    counter++;
+    if (counter === 2) {
+      collector.stop();
+    }
+  });
 };
 
 module.exports = {

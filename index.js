@@ -171,7 +171,7 @@ client.on('message', async (msg) => {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
 
-        const checkReturn = await askMembers(client.users, askContent);
+        const checkReturn = await askMembers(client.users, askContent, client);
 
         if (checkReturn === 'noEvent') {
           return msg.channel.send(`Não existe um evento em andamento`);
