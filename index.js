@@ -17,6 +17,7 @@ const {
   askMembers,
   getAnswers,
   stopAnswers,
+  getMembers,
 } = require('./commands/manageEvent');
 
 // Define things
@@ -45,16 +46,14 @@ client.on('ready', () => {
 });
 
 client.on('message', async (msg) => {
-  if (msg.author.bot) return;
-
   // To get users answers
   if (msg.channel.type === 'dm') {
     await getAnswers(msg, client);
   }
 
-  if (msg.content.substring(0, prefix.length) !== prefix) return;
+  if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
-  const args = msg.content.slice(prefix.length).trim().split(/ +/g);
+  const args = msg.content.slice(prefix.length).trim().split(/ +/);
   const comando = args.shift().toLocaleLowerCase();
 
   switch (comando) {
@@ -92,7 +91,7 @@ client.on('message', async (msg) => {
 
       await msg.channel.send(`Evento "${eventNameCap}" criado`);
       break;
-      
+
     case 'checar':
     case 'check': {
       const checkReturn = await checkEvent();
@@ -203,7 +202,18 @@ client.on('message', async (msg) => {
         }
       }
       break;
-      
+
+    case 'get_members':
+      {
+        const checkReturn = await getMembers();
+
+        return msg.channel.send(
+          `Participantes do evento: ${checkReturn.name} (${
+            checkReturn.isActive ? 'Ativo' : 'Finalizado'
+          }) \n${checkReturn.list}`,
+        );
+      }
+      break;
     default:
       await msg.channel.send('Comando não encontrado');
   }

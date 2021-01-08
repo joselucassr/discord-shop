@@ -137,7 +137,7 @@ const getAnswers = async (msg, client) => {
 
     destination.send(embed);
 
-    await msg.author.send("Resposta enviada com sucesso")
+    await msg.author.send('Resposta enviada com sucesso');
   }
 };
 
@@ -153,6 +153,21 @@ const stopAnswers = async () => {
   return 'stopped';
 };
 
+const getMembers = async () => {
+  // Check for active events
+  const event = await Event.findOne().sort({ _id: -1 });
+
+  let membersIn = event.members_ids;
+
+  let list = ``;
+
+  for (let i = 0; i < membersIn.length; i++) {
+    list = list + `<@${membersIn[i]}>\n`;
+  }
+
+  return { list, isActive: event.event_is_active, name: event.name };
+};
+
 module.exports = {
   createEvent,
   checkEvent,
@@ -161,4 +176,5 @@ module.exports = {
   askMembers,
   getAnswers,
   stopAnswers,
+  getMembers,
 };
