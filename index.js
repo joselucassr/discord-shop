@@ -99,9 +99,12 @@ client.on('message', async (msg) => {
       let filter = (m) => true;
       let collector = new Discord.MessageCollector(msg.channel, filter);
       collector.on('collect', (msg, col) => {
-        console.log(`coletei a mensagem ${msg.content}`);
+        client.channels.cache
+          .get('796946980843945984')
+          .send(`coletei a mensagem ${msg.content}`);
       });
 
+      break;
     default:
       await msg.channel.send('Comando não encontrado');
   }
