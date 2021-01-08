@@ -120,7 +120,7 @@ client.on('message', async (msg) => {
         console.log(`mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`);
 
       if(destination) {
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
             .setTitle('nova mensagem')
             .setDescription(msg.content)
             .setTimestamp()
