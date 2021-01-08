@@ -128,7 +128,7 @@ const getAnswers = async (msg, client) => {
 
   if (destination) {
     let embed = new Discord.MessageEmbed()
-      .setTitle('nova mensagem')
+      .setTitle(`Resposta do evento: ${activeEvent.event_name}`)
       .setDescription(msg.content)
       .setImage(msg.attachments.first() && msg.attachments.first().url)
       .setTimestamp()
