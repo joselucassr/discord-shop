@@ -58,7 +58,7 @@ client.on('message', async (msg) => {
       msg.author.send('teste');
       break;
     case 'create':
-      let eventName = msg.content.s.match(/"([^"]+)"/)[1];
+      let eventName = msg.content.match(/"([^"]+)"/)[1];
       if (!eventName) {
         return await msg.channel.send(
           `Por favor digite um nome para o evento entre áspas`,
