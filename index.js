@@ -111,17 +111,18 @@ client.on('message', async (msg) => {
       let counter = 0;
       let filter = (m) => true;
       let collector = new Discord.MessageCollector(msg.channel, filter);
-      let destination = client.channels.cache.get('79694698084394598');
+      let destination = client.channels.get('796946980843945984')
       collector.on('collect', (msg, col) => {
-        console.log(`mensagem coletada: ${msg.content}`);
-        if (destination) {
+        console.log(`mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`);
+
+      if(destination) {
         let embed = new Discord.RichEmbed()
             .setTitle('nova mensagem')
             .setDescription(msg.content)
             .setTimestamp()
             .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
             .setColor('#4affea');
-
+          
           destination.send(msg.content);
         }
 
