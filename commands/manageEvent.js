@@ -45,6 +45,7 @@ const stopEvent = async () => {
     if (!activeEvent) return 'noEvent';
 
     activeEvent.event_is_active = false;
+    activeEvent.event_updated_at = Date.now();
     await activeEvent.save();
 
     return {
