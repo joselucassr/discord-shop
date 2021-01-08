@@ -136,6 +136,8 @@ const getAnswers = async (msg, client) => {
       .setColor('#4affea');
 
     destination.send(embed);
+
+    await msg.author.send("Resposta enviada com sucesso")
   }
 };
 

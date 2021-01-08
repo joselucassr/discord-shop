@@ -95,6 +95,8 @@ client.on('message', async (msg) => {
 
       await msg.channel.send(`Evento "${eventNameCap}" criado`);
       break;
+      
+    case 'checar':
     case 'check': {
       const checkReturn = await checkEvent();
 
@@ -119,7 +121,7 @@ client.on('message', async (msg) => {
       );
       break;
     }
-
+    case 'entrar':
     case 'join_event': {
       const checkReturn = await joinEvent(msg.author.id);
 
