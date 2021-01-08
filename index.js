@@ -90,7 +90,7 @@ client.on('message', async (msg) => {
       );
       break;
       
-      case : "copyto"
+      case "copyto":
           msg.channel.send('coletando mensagens')
           let filter = m => true;
           let collector = new Discord.MessageCollector(msg.channel, filter)
