@@ -112,7 +112,7 @@ client.on('message', async (msg) => {
       break;
     }
 
-    case 'join': {
+    case 'join_event': {
       const checkReturn = await joinEvent(msg.author.id);
 
       if (checkReturn === 'noEvent') {
