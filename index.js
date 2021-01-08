@@ -4,9 +4,9 @@
  * A ping pong bot, whenever you send "ping", it replies "pong".
  */
 
-// Import the discord.js module
+// Import modules
 const Discord = require('discord.js');
-const config = require('./config.json');
+const config = require('config');
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
@@ -29,7 +29,10 @@ client.on('ready', () => {
 client.on('message', async (message) => {
   if (message.author.bot) return;
 
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const args = message.content
+    .slice(config.get('prefix').length)
+    .trim()
+    .split(/ +/g);
   const comando = args.shift().toLocaleLowerCase();
 
   if (comando === 'ping') {
