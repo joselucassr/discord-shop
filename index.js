@@ -115,7 +115,7 @@ client.on('message', async (msg) => {
       let counter = 0;
       let filter = (m) => true;
       let collector = new Discord.MessageCollector(msg.channel, filter);
-      let destination = client.channels.get('796946980843945984')
+      let destination = client.channels.cache.get('796946980843945984')
       collector.on('collect', (msg, col) => {
         console.log(`mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`);
 
