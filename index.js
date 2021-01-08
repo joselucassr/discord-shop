@@ -20,7 +20,7 @@ const {
   getMembers,
 } = require('./commands/manageEvent');
 
-const { run } = require('./commands/manageGiveaway');
+// const { run } = require('./commands/manageGiveaway');
 
 const { checkRole } = require('./utils/checker');
 
@@ -235,9 +235,9 @@ client.on('message', async (msg) => {
       );
     }
 
-    case 'sorteio':
-      run(client, msg);
-      break;
+    // case 'sorteio':
+    //   run(client, msg);
+    //   break;
     default:
       await msg.channel.send('Comando não encontrado');
   }

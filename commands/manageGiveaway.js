@@ -69,14 +69,17 @@ exports.run = async (Client, Message, args) => {
       .send(':tada: **SORTEIO** :tada:', embed);
     await msg.react('🎉'); // check if it works
     setTimeout(() => {
-      console.log(msg);
       msg.reactions.cache.get('🎉').users.remove(Client.user.id);
       setTimeout(() => {
         let guildMembers = msg.reactions.cache.get('🎉').users;
+        console.log(guildMembers);
+
         let winner =
           guildMembers[
             Math.floor(Math.random() * Math.floor(guildMembers.length))
           ];
+
+        console.log(winner);
 
         if (msg.reactions.cache.get('🎉').users.cache.size < 1) {
           const winner_embed = new Discord.MessageEmbed()
