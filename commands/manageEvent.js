@@ -104,8 +104,8 @@ const getAnswers = async (msg, client) => {
   const activeEvent = await Event.findOne({ event_is_active: true });
 
   if (!activeEvent) return 'noEvent';
-
   if (!activeEvent.members_ids.includes(msg.author.id)) return 'null';
+  if (!activeEvent.event_accept_msg) return 'null';
 
   let destination = client.channels.cache.get('796946980843945984');
 
@@ -127,7 +127,7 @@ const stopAnswers = async () => {
 
   if (!activeEvent) return 'noEvent';
 
-  activeEvent.event_accept_msg = true;
+  activeEvent.event_accept_msg = false;
   await activeEvent.save();
 
   return 'stopped';
