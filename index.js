@@ -113,7 +113,7 @@ client.on('message', async (msg) => {
     case 'copyto':
       msg.channel.send('coletando mensagens');
       let counter = 0;
-      let filter = (m) => !m.author.botSS
+      let filter = (m) => !m.author.bot
       let collector = new Discord.MessageCollector(msg.channel, filter);
       let destination = client.channels.cache.get('796946980843945984')
       collector.on('collect', (msg, col) => {
