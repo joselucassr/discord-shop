@@ -117,16 +117,10 @@ client.on('message', async (msg) => {
       let collector = new Discord.MessageCollector(msg.channel, filter);
       let destination = client.channels.get('796946980843945984')
       collector.on('collect', (msg, col) => {
-<<<<<<< HEAD
         console.log(`mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`);
 
       if(destination) {
         let embed = new Discord.RichEmbed()
-=======
-        console.log(`mensagem coletada: ${msg.content}`);
-        if (destination) {
-          let embed = new Discord.RichEmbed()
->>>>>>> 2016cc8034b20166498c75c83108cb6a981595b9
             .setTitle('nova mensagem')
             .setDescription(msg.content)
             .setTimestamp()
