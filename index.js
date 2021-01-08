@@ -53,7 +53,7 @@ client.on('message', async (msg) => {
 
   // To get users answers
   if (msg.channel.type === 'dm') {
-    getAnswers(msg);
+    getAnswers(msg, client);
   }
 
   switch (comando) {

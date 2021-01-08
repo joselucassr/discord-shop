@@ -89,7 +89,6 @@ const askMembers = async (users, askContent, client) => {
       const user = await users.fetch(membersIds[i], true);
 
       await user.send(askContent);
-      getAnswers(user, client);
     }
 
     return 'allSent';
@@ -98,7 +97,7 @@ const askMembers = async (users, askContent, client) => {
   }
 };
 
-const getAnswers = async (msg) => {
+const getAnswers = async (msg, client) => {
   // Check for active events
   const activeEvent = await Event.findOne({ event_is_active: true });
 
