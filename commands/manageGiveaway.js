@@ -70,7 +70,7 @@ exports.run = async (Client, Message, args) => {
     await msg.react('🎉'); // check if it works
     setTimeout(() => {
       console.log(msg);
-      msg.reaction.cache.get('🎉').users.remove(Client.user.id);
+      msg.reactions.cache.get('🎉').users.remove(Client.user.id);
       setTimeout(() => {
         let guildMembers = msg.reactions.cache.get('🎉').users;
         let winner =
