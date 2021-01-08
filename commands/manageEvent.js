@@ -36,7 +36,25 @@ const checkEvent = async () => {
     console.error(err.message);
   }
 };
+
+const stopEvent = async () => {
+  try {
+    // Check for active events
+    const activeEvent = await Event.findOne({ event_is_active: true });
+
+    if (!activeEvent) return 'noEvent';
+
+    activeEvent.event_is_active = false;
+    await activeEvent.save();
+
+    return {
+      eventName: activeEvent.event_name,
+      memberCount: activeEvent.members_ids.length,
+    };
+  } catch (err) {}
+};
 module.exports = {
   createEvent,
   checkEvent,
+  stopEvent,
 };
