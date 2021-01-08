@@ -120,6 +120,10 @@ client.on('message', async (msg) => {
         return msg.channel.send(`Não existe um evento em andamento`);
       }
 
+      if (checkReturn === 'alreadyIn') {
+        return msg.channel.send(`Você já faz parte deste evento`);
+      }
+
       await msg.channel.send(`<@${msg.author.id}> entrou!`);
       break;
     }
