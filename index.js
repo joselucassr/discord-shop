@@ -83,7 +83,7 @@ client.on('message', async (msg) => {
       await msg.channel.send(`Evento "${eventNameCap}" criado`);
       break;
     case 'check':
-      const checkReturn = await checkEvent();
+      let checkReturn = await checkEvent();
 
       if (checkReturn === 'noEvent') {
         return msg.channel.send(`Não existe um evento em andamento`);
@@ -95,7 +95,7 @@ client.on('message', async (msg) => {
       break;
 
     case 'stopEvent':
-      const checkReturn = await checkEvent();
+      let checkReturn = await checkEvent();
 
       if (checkReturn === 'noEvent') {
         return msg.channel.send(`Não existe um evento em andamento`);
