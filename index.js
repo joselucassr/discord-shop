@@ -13,6 +13,7 @@ const {
   createEvent,
   checkEvent,
   stopEvent,
+  joinEvent,
 } = require('./commands/manageEvent');
 
 // Define things
@@ -110,23 +111,36 @@ client.on('message', async (msg) => {
       );
       break;
     }
+
+    case 'join': {
+      const checkReturn = await joinEvent();
+
+      if (checkReturn === 'noEvent') {
+        return msg.channel.send(`Não existe um evento em andamento`);
+      }
+
+      await msg.channel.send(`"@${msg.author.tag}" entrou!`);
+      break;
+    }
     case 'copyto':
       msg.channel.send('coletando mensagens');
       let counter = 0;
-      let filter = (m) => !m.author.bot
+      let filter = (m) => !m.author.bot;
       let collector = new Discord.MessageCollector(msg.channel, filter);
-      let destination = client.channels.cache.get('796946980843945984')
+      let destination = client.channels.cache.get('796946980843945984');
       collector.on('collect', (msg, col) => {
-        console.log(`mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`);
+        console.log(
+          `mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`,
+        );
 
-      if(destination) {
-        let embed = new Discord.MessageEmbed()
+        if (destination) {
+          let embed = new Discord.MessageEmbed()
             .setTitle('nova mensagem')
             .setDescription(msg.content)
             .setTimestamp()
             .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
             .setColor('#4affea');
-          
+
           destination.send(embed);
         }
 

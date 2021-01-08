@@ -54,8 +54,11 @@ const stopEvent = async () => {
     };
   } catch (err) {}
 };
+
+const joinEvent = async () => {};
 module.exports = {
   createEvent,
   checkEvent,
   stopEvent,
+  joinEvent,
 };
