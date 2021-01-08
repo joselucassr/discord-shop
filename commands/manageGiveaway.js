@@ -23,10 +23,10 @@ exports.run = async (Client, Message, args) => {
       );
       time_duration = started_time_duration * 3600000;
       if (time_duration == 3600000) {
-        time_length = 'hour';
+        time_length = 'hora';
       }
       if (time_duration > 7200000) {
-        time_length = 'hours';
+        time_length = 'horas';
       }
     }
     if (started_time_duration_start.toLowerCase().includes('m')) {
@@ -35,10 +35,10 @@ exports.run = async (Client, Message, args) => {
       );
       time_duration = started_time_duration_start * 60000;
       if (time_duration < 3600000) {
-        time_length = 'minutes';
+        time_length = 'minutos';
       }
       if (time_duration == 60000) {
-        time_length = 'minute';
+        time_length = 'minuto';
       }
     }
     if (isNaN(started_time_duration))
