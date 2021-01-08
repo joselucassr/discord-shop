@@ -208,9 +208,9 @@ client.on('message', async (msg) => {
         const checkReturn = await getMembers();
 
         return msg.channel.send(
-          `Participantes do evento: ${checkReturn.name} (${
+          `Participantes do evento: **${checkReturn.name}** (*${
             checkReturn.isActive ? 'Ativo' : 'Finalizado'
-          }) \n${checkReturn.list}`,
+          }*) \n${checkReturn.list}`,
         );
       }
       break;
