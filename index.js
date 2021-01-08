@@ -47,6 +47,7 @@ client.on('message', async (message) => {
           m.createdTimestamp - message.createdTimestamp
         }ms.`,
       );
+      break;
     default:
       await message.channel.send('Comando não encontrado');
   }
