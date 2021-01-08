@@ -94,6 +94,18 @@ client.on('message', async (msg) => {
       );
       break;
 
+    case 'stopEvent':
+      const checkReturn = await checkEvent();
+
+      if (checkReturn === 'noEvent') {
+        return msg.channel.send(`Não existe um evento em andamento`);
+      }
+
+      await msg.channel.send(
+        `O evento "${checkReturn.eventName}" foi encerrado e contou com ${checkReturn.memberCount} membros`,
+      );
+      break;
+
     case 'copyto':
       msg.channel.send('coletando mensagens');
       let filter = (m) => true;
