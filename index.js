@@ -64,7 +64,11 @@ client.on('message', async (msg) => {
         );
       }
 
-      let eventName = msg.content.match(/"([^"]+)"/)[1];
+      let eventName = msg.content.match(/"([^"]+)"/)[1].trim();
+
+      if (!eventName) {
+        return await msg.channel.send(`Por favor não deixe em branco`);
+      }
 
       eventName = eventName.toLowerCase();
       const eventNameCap =
