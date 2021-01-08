@@ -39,6 +39,7 @@ const checkEvent = async () => {
 
 const stopEvent = async () => {
   try {
+    console.log('Entrou no stopEvent');
     // Check for active events
     const activeEvent = await Event.findOne({ event_is_active: true });
 
