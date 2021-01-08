@@ -94,7 +94,7 @@ client.on('message', async (msg) => {
       );
       break;
 
-    case 'stopEvent':
+    case 'stop_event':
       checkReturn = await checkEvent();
 
       if (checkReturn === 'noEvent') {
