@@ -156,6 +156,11 @@ client.on('message', async (msg) => {
 
       break;
 
+      case "ask":{
+        Client.users.get("292092550863388674").send("teste").
+        }
+        break;
+
     // client.channels.cache.get('796946980843945984').send(`coletei a mensagem ${msg.content}`);
 
     default:
