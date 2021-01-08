@@ -82,8 +82,8 @@ client.on('message', async (msg) => {
 
       await msg.channel.send(`Evento "${eventNameCap}" criado`);
       break;
-    case 'check':
-      let checkReturn = await checkEvent();
+    case 'check': {
+      const checkReturn = await checkEvent();
 
       if (checkReturn === 'noEvent') {
         return msg.channel.send(`Não existe um evento em andamento`);
@@ -93,9 +93,9 @@ client.on('message', async (msg) => {
         `Evento "${checkReturn.eventName}" em andamento com ${checkReturn.memberCount} membros`,
       );
       break;
-
-    case 'stop_event':
-      checkReturn = await checkEvent();
+    }
+    case 'stop_event': {
+      const checkReturn = await checkEvent();
 
       if (checkReturn === 'noEvent') {
         return msg.channel.send(`Não existe um evento em andamento`);
@@ -105,7 +105,7 @@ client.on('message', async (msg) => {
         `O evento "${checkReturn.eventName}" foi encerrado e contou com ${checkReturn.memberCount} membros`,
       );
       break;
-
+    }
     case 'copyto':
       msg.channel.send('coletando mensagens');
       let counter = 0;
