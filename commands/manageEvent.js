@@ -21,7 +21,7 @@ const createEvent = async (name, client) => {
       status: 'online',
       activity: {
         name,
-        type: 'STREAMING',
+        type: 'PLAYING',
       },
     });
   } catch (err) {
@@ -48,7 +48,7 @@ const checkEvent = async () => {
   }
 };
 
-const stopEvent = async () => {
+const stopEvent = async (client) => {
   try {
     // Check for active events
     const activeEvent = await Event.findOne({ event_is_active: true });
@@ -58,6 +58,14 @@ const stopEvent = async () => {
     activeEvent.event_is_active = false;
     activeEvent.event_updated_at = Date.now();
     await activeEvent.save();
+
+    client.user.setPresence({
+      status: 'online',
+      activity: {
+        name: 'bola na praia',
+        type: 'PLAYING',
+      },
+    });
 
     return {
       eventName: activeEvent.event_name,

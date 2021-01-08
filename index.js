@@ -108,7 +108,7 @@ client.on('message', async (msg) => {
       break;
     }
     case 'stop_event': {
-      const checkReturn = await stopEvent();
+      const checkReturn = await stopEvent(client);
 
       if (checkReturn === 'noEvent') {
         return msg.channel.send(`Não existe um evento em andamento`);
