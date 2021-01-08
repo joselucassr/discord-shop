@@ -200,7 +200,7 @@ client.on('message', async (msg) => {
         }
 
         if (checkReturn === 'stopped') {
-          return msg.channel.send(`Receber respostas: Ligado`);
+          return msg.channel.send(`Receber respostas: Desligado`);
         }
       }
       break;
