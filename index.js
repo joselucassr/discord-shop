@@ -156,11 +156,31 @@ client.on('message', async (msg) => {
 
       break;
 
-      case "ask":{
-        const testeuser = await client.users.fetch('292092550863388674', true)
-        await testeuser.send('Blabla')
+    case 'ask':
+      {
+        if (!msg.content.match(/"([^"]+)"/)) {
+          return await msg.channel.send(
+            `Por favor digite a mensagem que será enviada.`,
+          );
         }
-        break;
+
+        let askContent = msg.content.match(/"([^"]+)"/)[1].trim();
+
+        if (!askContent) {
+          return await msg.channel.send(`Por favor não deixe em branco!`);
+        }
+
+        const checkReturn = await askMembers(client.users, askContent);
+
+        if (checkReturn === 'noEvent') {
+          return msg.channel.send(`Não existe um evento em andamento`);
+        }
+
+        if (checkReturn === 'allSent') {
+          return msg.channel.send(`Mensagem enviada a todos`);
+        }
+      }
+      break;
 
     // client.channels.cache.get('796946980843945984').send(`coletei a mensagem ${msg.content}`);
 

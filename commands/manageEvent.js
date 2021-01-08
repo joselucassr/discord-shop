@@ -52,24 +52,53 @@ const stopEvent = async () => {
       eventName: activeEvent.event_name,
       memberCount: activeEvent.members_ids.length,
     };
-  } catch (err) {}
+  } catch (err) {
+    console.error(err.message);
+  }
 };
 
 const joinEvent = async (discord_id) => {
-  // Check for active events
-  const activeEvent = await Event.findOne({ event_is_active: true });
+  try {
+    // Check for active events
+    const activeEvent = await Event.findOne({ event_is_active: true });
 
-  if (!activeEvent) return 'noEvent';
+    if (!activeEvent) return 'noEvent';
 
-  if (activeEvent.members_ids.includes(discord_id)) return 'alreadyIn';
+    if (activeEvent.members_ids.includes(discord_id)) return 'alreadyIn';
 
-  activeEvent.members_ids.push(discord_id);
-  activeEvent.event_updated_at = Date.now();
-  await activeEvent.save();
+    activeEvent.members_ids.push(discord_id);
+    activeEvent.event_updated_at = Date.now();
+    await activeEvent.save();
+  } catch (err) {
+    console.error(err.message);
+  }
 };
+
+const askMembers = async (users, askContent) => {
+  try {
+    // Check for active events
+    const activeEvent = await Event.findOne({ event_is_active: true });
+
+    if (!activeEvent) return 'noEvent';
+
+    const membersIds = activeEvent.members_ids;
+
+    for (let i = 0; i < membersIds.length; i++) {
+      const user = await users.fetch(membersIds[i], true);
+
+      await user.send(askContent);
+    }
+
+    return 'allSent';
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
 module.exports = {
   createEvent,
   checkEvent,
   stopEvent,
   joinEvent,
+  askMembers,
 };
