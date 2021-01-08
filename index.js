@@ -108,15 +108,33 @@ client.on('message', async (msg) => {
 
     case 'copyto':
       msg.channel.send('coletando mensagens');
+      let counter = 0;
       let filter = (m) => true;
       let collector = new Discord.MessageCollector(msg.channel, filter);
+      let destination = client.channels.get('79694698084394598');
       collector.on('collect', (msg, col) => {
-        client.channels.cache
-          .get('796946980843945984')
-          .send(`coletei a mensagem ${msg.content}`);
+        console.log(`mensagem coletada: ${msg.content}`);
+        if (destination) {
+          let embed = new Discord.RichEmbed()
+            .setTitle('nova mensagem')
+            .setDescription(msg.content)
+            .setTimestamp()
+            .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
+            .setColor('#4affea');
+
+          destination.send(embed);
+        }
+
+        counter++;
+        if (counter === 2) {
+          collector.stop();
+        }
       });
 
       break;
+
+    // client.channels.cache.get('796946980843945984').send(`coletei a mensagem ${msg.content}`);
+
     default:
       await msg.channel.send('Comando não encontrado');
   }
