@@ -61,6 +61,9 @@ const joinEvent = async (discord_id) => {
 
   if (!activeEvent) return 'noEvent';
 
+  console.log(discord_id);
+  console.log(discord_id.toString());
+
   activeEvent.members_ids = activeEvent.members_ids.push(discord_id.toString());
   activeEvent.event_updated_at = Date.now();
   await activeEvent.save();
