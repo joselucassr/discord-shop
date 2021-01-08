@@ -9,7 +9,11 @@ const Discord = require('discord.js');
 const config = require('config');
 
 // Import commands
-const { createEvent, checkEvent } = require('./commands/manageEvent');
+const {
+  createEvent,
+  checkEvent,
+  stopEvent,
+} = require('./commands/manageEvent');
 
 // Define things
 const prefix = config.get('prefix');
