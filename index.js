@@ -8,6 +8,8 @@
 const Discord = require('discord.js');
 const config = require('config');
 
+const prefix = config.get('prefix');
+
 // Create an instance of a Discord client
 const client = new Discord.Client();
 
@@ -29,10 +31,7 @@ client.on('ready', () => {
 client.on('message', async (message) => {
   if (message.author.bot) return;
 
-  const args = message.content
-    .slice(config.get('prefix').length)
-    .trim()
-    .split(/ +/g);
+  const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const comando = args.shift().toLocaleLowerCase();
 
   if (comando === 'ping') {
