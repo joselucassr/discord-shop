@@ -8,6 +8,9 @@
 const Discord = require('discord.js');
 const config = require('config');
 
+// Import commands
+const { createEvent, checkEvent } = require('./commands/manageEvent');
+
 // Define things
 const prefix = config.get('prefix');
 
@@ -53,6 +56,35 @@ client.on('message', async (msg) => {
 
     case 'join':
       msg.author.send('teste');
+      break;
+    case 'create':
+      const eventName = args[1].toLowerCase;
+      const eventNameCap =
+        eventName.charAt(0).toUpperCase() + eventName.slice(1);
+
+      if (eventNameCap === '') {
+        return await msg.channel.send(
+          `Por favor escolha um nome para o evento`,
+        );
+      }
+      const createReturn = await createEvent(eventNameCap);
+
+      if (createReturn === 'isActive') {
+        return await msg.channel.send(`Já existe um evento em andamento`);
+      }
+
+      await msg.channel.send(`Evento "${eventNameCap}" criado`);
+      break;
+    case 'check':
+      const checkReturn = await checkEvent();
+
+      if (checkReturn === 'noEvent') {
+        return msg.channel.send(`Não existe um evento em andamento`);
+      }
+
+      await msg.channel.send(
+        `Evento "${checkReturn.eventName}" em andamento com ${checkReturn.eventCount} membros`,
+      );
       break;
 
     default:
