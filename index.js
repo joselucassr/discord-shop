@@ -8,7 +8,7 @@
 const Discord = require('discord.js');
 const config = require('config');
 
-// Import commands
+// Import functions
 const {
   createEvent,
   checkEvent,
@@ -19,6 +19,8 @@ const {
   stopAnswers,
   getMembers,
 } = require('./commands/manageEvent');
+
+const { checkRole } = require('./utils/checker');
 
 // Define things
 const prefix = config.get('prefix');
@@ -67,6 +69,7 @@ client.on('message', async (msg) => {
       break;
 
     case 'create':
+      checkRole();
       if (!msg.content.match(/"([^"]+)"/)) {
         return await msg.channel.send(
           `Por favor digite um nome para o evento entre áspas`,
@@ -94,6 +97,7 @@ client.on('message', async (msg) => {
 
     case 'checar':
     case 'check': {
+      checkRole();
       const checkReturn = await checkEvent();
 
       if (checkReturn === 'noEvent') {
@@ -106,6 +110,7 @@ client.on('message', async (msg) => {
       break;
     }
     case 'stop_event': {
+      checkRole();
       const checkReturn = await stopEvent(client);
 
       if (checkReturn === 'noEvent') {
@@ -164,6 +169,7 @@ client.on('message', async (msg) => {
 
     case 'ask':
       {
+        checkRole();
         if (!msg.content.match(/"([^"]+)"/)) {
           return await msg.channel.send(
             `Por favor digite a mensagem que será enviada.`,
@@ -191,6 +197,7 @@ client.on('message', async (msg) => {
       break;
     case 'stop_ask':
       {
+        checkRole();
         const checkReturn = await stopAnswers();
 
         if (checkReturn === 'noEvent') {
@@ -205,6 +212,8 @@ client.on('message', async (msg) => {
 
     case 'get_members':
       {
+        checkRole();
+
         const checkReturn = await getMembers();
 
         return msg.channel.send(
