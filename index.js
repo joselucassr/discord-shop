@@ -92,11 +92,17 @@ client.on('message', async (msg) => {
       
       case "copyto":
           msg.channel.send('coletando mensagens')
+          let counter = 0
           let filter = m => true;
           let collector = new Discord.MessageCollector(msg.channel, filter)
           collector.on('collect', (msg, col) => {
-            client.channels.cache.get('796946980843945984').send(`coletei a mensagem ${msg.content}`);         
+            client.channels.cache.get('796946980843945984').send(`coletei a mensagem ${msg.content}`);  
+            counter++
+            if(counter === 2) {
+              collector.stop()
+            }
           })
+
 
 
           break;
