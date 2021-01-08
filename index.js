@@ -58,13 +58,14 @@ client.on('message', async (msg) => {
       msg.author.send('teste');
       break;
     case 'create':
-      if (!args[1]) {
+      let eventName = msg.content.s.match(/"([^"]+)"/)[1];
+      if (!eventName) {
         return await msg.channel.send(
-          `Por favor escolha um nome para o evento`,
+          `Por favor digite um nome para o evento entre áspas`,
         );
       }
 
-      const eventName = args[1].toLowerCase;
+      eventName = eventName.toLowerCase;
       const eventNameCap =
         eventName.charAt(0).toUpperCase() + eventName.slice(1);
 
