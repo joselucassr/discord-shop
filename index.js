@@ -64,7 +64,11 @@ client.on('message', async (msg) => {
         );
       }
 
-      let eventName = msg.content.match(/"([^"]+)"/)[1];
+      let eventName = msg.content.match(/"([^"]+)"/)[1].trim();
+
+      if (!eventName) {
+        return await msg.channel.send(`Por favor não deixe em branco`);
+      }
 
       eventName = eventName.toLowerCase();
       const eventNameCap =
@@ -89,17 +93,14 @@ client.on('message', async (msg) => {
         `Evento "${checkReturn.eventName}" em andamento com ${checkReturn.memberCount} membros`,
       );
       break;
-      
-      case "copyto":
-          msg.channel.send('coletando mensagens')
-          let filter = m => true;
-          let collector = new Discord.MessageCollector(msg.channel, filter)
-          collector.on('collect', (msg, col) => {
-            console.log  (`coletei a mensagem ${msg.content}`)
-          })
-      
 
-
+    case 'copyto':
+      msg.channel.send('coletando mensagens');
+      let filter = (m) => true;
+      let collector = new Discord.MessageCollector(msg.channel, filter);
+      collector.on('collect', (msg, col) => {
+        console.log(`coletei a mensagem ${msg.content}`);
+      });
 
     default:
       await msg.channel.send('Comando não encontrado');
