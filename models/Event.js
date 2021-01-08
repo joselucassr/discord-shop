@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const EventSchema = new mongoose.Schema({
   event_name: {
     type: String,
+    required: true,
   },
   members_ids: [
     {
@@ -11,6 +12,7 @@ const EventSchema = new mongoose.Schema({
   ],
   event_is_active: {
     type: Boolean,
+    default: true,
   },
   event_created_at: {
     type: Date,
