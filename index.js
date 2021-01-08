@@ -157,7 +157,10 @@ client.on('message', async (msg) => {
       break;
 
       case "ask":{
-        client.users.cache.get('292092550863388674').send('Blabla')
+        //client.users.cache.get('292092550863388674').send('Blabla')
+        client.fetchUser('292092550863388674', false).then((user) => {
+          user.send('heloo');
+         });
         }
         break;
 
