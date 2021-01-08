@@ -4,6 +4,11 @@ const EventSchema = new mongoose.Schema({
   event_name: {
     type: String,
   },
+  members_ids: [
+    {
+      type: String,
+    },
+  ],
   event_created_at: {
     type: Date,
     default: Date.now,
