@@ -69,7 +69,7 @@ client.on('message', async (msg) => {
       break;
 
     case 'create':
-      checkRole();
+      checkRole(msg);
       if (!msg.content.match(/"([^"]+)"/)) {
         return await msg.channel.send(
           `Por favor digite um nome para o evento entre áspas`,
@@ -97,7 +97,7 @@ client.on('message', async (msg) => {
 
     case 'checar':
     case 'check': {
-      checkRole();
+      checkRole(msg);
       const checkReturn = await checkEvent();
 
       if (checkReturn === 'noEvent') {
@@ -110,7 +110,7 @@ client.on('message', async (msg) => {
       break;
     }
     case 'stop_event': {
-      checkRole();
+      checkRole(msg);
       const checkReturn = await stopEvent(client);
 
       if (checkReturn === 'noEvent') {
@@ -169,7 +169,7 @@ client.on('message', async (msg) => {
 
     case 'ask':
       {
-        checkRole();
+        checkRole(msg);
         if (!msg.content.match(/"([^"]+)"/)) {
           return await msg.channel.send(
             `Por favor digite a mensagem que será enviada.`,
@@ -197,7 +197,7 @@ client.on('message', async (msg) => {
       break;
     case 'stop_ask':
       {
-        checkRole();
+        checkRole(msg);
         const checkReturn = await stopAnswers();
 
         if (checkReturn === 'noEvent') {
@@ -212,7 +212,7 @@ client.on('message', async (msg) => {
 
     case 'get_members':
       {
-        checkRole();
+        checkRole(msg);
 
         const checkReturn = await getMembers();
 
