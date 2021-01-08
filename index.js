@@ -58,15 +58,16 @@ client.on('message', async (msg) => {
       msg.author.send('teste');
       break;
     case 'create':
-      const eventName = args[1].toLowerCase;
-      const eventNameCap =
-        eventName.charAt(0).toUpperCase() + eventName.slice(1);
-
-      if (eventNameCap === '') {
+      if (!args[1]) {
         return await msg.channel.send(
           `Por favor escolha um nome para o evento`,
         );
       }
+
+      const eventName = args[1].toLowerCase;
+      const eventNameCap =
+        eventName.charAt(0).toUpperCase() + eventName.slice(1);
+
       const createReturn = await createEvent(eventNameCap);
 
       if (createReturn === 'isActive') {
