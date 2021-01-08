@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 // Models import
 const Event = require('../models/Event');
 
-const createEvent = async (name) => {
+const createEvent = async (name, client) => {
   try {
     // Check for active events
     const activeEvents = await Event.find({ event_is_active: true });
@@ -16,6 +16,14 @@ const createEvent = async (name) => {
 
     const event = new Event(eventFields);
     await event.save();
+
+    client.user.setPresence({
+      status: 'online',
+      activity: {
+        name,
+        type: 'STREAMING',
+      },
+    });
   } catch (err) {
     console.error(err.message);
   }

@@ -87,7 +87,7 @@ client.on('message', async (msg) => {
       const eventNameCap =
         eventName.charAt(0).toUpperCase() + eventName.slice(1);
 
-      const createReturn = await createEvent(eventNameCap);
+      const createReturn = await createEvent(eventNameCap, client);
 
       if (createReturn === 'isActive') {
         return await msg.channel.send(`Já existe um evento em andamento`);
