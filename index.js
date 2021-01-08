@@ -20,6 +20,8 @@ const {
   getMembers,
 } = require('./commands/manageEvent');
 
+const { run } = require('./commands/manageGiveaway');
+
 const { checkRole } = require('./utils/checker');
 
 // Define things
@@ -220,19 +222,21 @@ client.on('message', async (msg) => {
       }
       break;
 
-    case 'get_members':
-      {
-        let roleCheck = checkRole(msg);
-        if (roleCheck === 'noPerm') return;
+    case 'get_members': {
+      let roleCheck = checkRole(msg);
+      if (roleCheck === 'noPerm') return;
 
-        const checkReturn = await getMembers();
+      const checkReturn = await getMembers();
 
-        return msg.channel.send(
-          `Participantes do evento: **${checkReturn.name}** (*${
-            checkReturn.isActive ? 'Ativo' : 'Finalizado'
-          }*) \n${checkReturn.list}`,
-        );
-      }
+      return msg.channel.send(
+        `Participantes do evento: **${checkReturn.name}** (*${
+          checkReturn.isActive ? 'Ativo' : 'Finalizado'
+        }*) \n${checkReturn.list}`,
+      );
+    }
+
+    case 'sorteio':
+      run(client, msg);
       break;
     default:
       await msg.channel.send('Comando não encontrado');
