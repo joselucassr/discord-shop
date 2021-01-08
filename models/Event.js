@@ -9,6 +9,9 @@ const EventSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  event_is_active: {
+    type: Boolean,
+  },
   event_created_at: {
     type: Date,
     default: Date.now,
