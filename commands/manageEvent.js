@@ -55,7 +55,16 @@ const stopEvent = async () => {
   } catch (err) {}
 };
 
-const joinEvent = async () => {};
+const joinEvent = async (discord_id) => {
+  // Check for active events
+  const activeEvent = await Event.findOne({ event_is_active: true });
+
+  if (!activeEvent) return 'noEvent';
+
+  activeEvent.members_ids = activeEvent.members_ids.push(discord_id);
+  activeEvent.event_updated_at = Date.now();
+  await activeEvent.save();
+};
 module.exports = {
   createEvent,
   checkEvent,
