@@ -130,7 +130,7 @@ const getAnswers = async (msg, client) => {
     let embed = new Discord.MessageEmbed()
       .setTitle('nova mensagem')
       .setDescription(msg.content)
-      .setImage(msg.attachments.url)
+      .setImage(msg.attachments.first().url)
       .setTimestamp()
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
       .setColor('#4affea');
