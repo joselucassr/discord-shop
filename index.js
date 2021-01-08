@@ -33,30 +33,30 @@ client.on('ready', () => {
   console.log('I am ready to work!');
 });
 
-client.on('message', async (message) => {
-  if (message.author.bot) return;
+client.on('message', async (msg) => {
+  if (msg.author.bot) return;
 
-  if (message.content.substring(0, prefix.length) !== prefix) return;
+  if (msg.content.substring(0, prefix.length) !== prefix) return;
 
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
+  const args = msg.content.slice(prefix.length).trim().split(/ +/g);
   const comando = args.shift().toLocaleLowerCase();
 
   switch (comando) {
     case 'ping':
-      const m = await message.channel.send('ping?');
+      const m = await msg.channel.send('ping?');
       m.edit(
         `pong!! A latência é de ${
-          m.createdTimestamp - message.createdTimestamp
+          m.createdTimestamp - msg.createdTimestamp
         }ms.`,
       );
       break;
 
     case 'join':
-      message.author.send('teste');
+      msg.author.send('teste');
       break;
 
     default:
-      await message.channel.send('Comando não encontrado');
+      await msg.channel.send('Comando não encontrado');
   }
 });
 
