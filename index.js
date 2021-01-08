@@ -46,17 +46,17 @@ client.on('ready', () => {
 client.on('message', async (msg) => {
   if (msg.author.bot) return;
 
-  if (msg.content.substring(0, prefix.length) !== prefix) return;
-
-  const args = msg.content.slice(prefix.length).trim().split(/ +/g);
-  const comando = args.shift().toLocaleLowerCase();
-
   // To get users answers
   console.log(msg.channel.type);
   if (msg.channel.type === 'dm') {
     console.log('entrou pra pedir a função');
     await getAnswers(msg, client);
   }
+
+  if (msg.content.substring(0, prefix.length) !== prefix) return;
+
+  const args = msg.content.slice(prefix.length).trim().split(/ +/g);
+  const comando = args.shift().toLocaleLowerCase();
 
   switch (comando) {
     case 'ping':
