@@ -69,7 +69,9 @@ client.on('message', async (msg) => {
       break;
 
     case 'create':
-      checkRole(msg);
+      let roleCheck = checkRole(msg);
+      if (roleCheck === 'noPerm') return;
+
       if (!msg.content.match(/"([^"]+)"/)) {
         return await msg.channel.send(
           `Por favor digite um nome para o evento entre áspas`,
@@ -97,7 +99,9 @@ client.on('message', async (msg) => {
 
     case 'checar':
     case 'check': {
-      checkRole(msg);
+      let roleCheck = checkRole(msg);
+      if (roleCheck === 'noPerm') return;
+
       const checkReturn = await checkEvent();
 
       if (checkReturn === 'noEvent') {
@@ -110,7 +114,9 @@ client.on('message', async (msg) => {
       break;
     }
     case 'stop_event': {
-      checkRole(msg);
+      let roleCheck = checkRole(msg);
+      if (roleCheck === 'noPerm') return;
+
       const checkReturn = await stopEvent(client);
 
       if (checkReturn === 'noEvent') {
@@ -169,7 +175,9 @@ client.on('message', async (msg) => {
 
     case 'ask':
       {
-        checkRole(msg);
+        let roleCheck = checkRole(msg);
+        if (roleCheck === 'noPerm') return;
+
         if (!msg.content.match(/"([^"]+)"/)) {
           return await msg.channel.send(
             `Por favor digite a mensagem que será enviada.`,
@@ -197,7 +205,9 @@ client.on('message', async (msg) => {
       break;
     case 'stop_ask':
       {
-        checkRole(msg);
+        let roleCheck = checkRole(msg);
+        if (roleCheck === 'noPerm') return;
+
         const checkReturn = await stopAnswers();
 
         if (checkReturn === 'noEvent') {
@@ -212,7 +222,8 @@ client.on('message', async (msg) => {
 
     case 'get_members':
       {
-        checkRole(msg);
+        let roleCheck = checkRole(msg);
+        if (roleCheck === 'noPerm') return;
 
         const checkReturn = await getMembers();
 
