@@ -29,8 +29,9 @@ const checkEvent = async () => {
     if (activeEvent) {
       const eventName = activeEvent.event_name;
       const memberCount = activeEvent.members_ids.length;
+      let acceptMsg = activeEvent.event_accept_msg === true ? 'Sim' : 'Não';
 
-      return { eventName, memberCount };
+      return { eventName, memberCount, acceptMsg };
     } else {
       return 'noEvent';
     }

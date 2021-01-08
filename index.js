@@ -103,7 +103,9 @@ client.on('message', async (msg) => {
       }
 
       await msg.channel.send(
-        `Evento "${checkReturn.eventName}" em andamento com ${checkReturn.memberCount} membros`,
+        `Evento: "${checkReturn.eventName}" 
+         Membros: ${checkReturn.memberCount}
+         Recebendo resposta: ${checkReturn.acceptMsg}`,
       );
       break;
     }
