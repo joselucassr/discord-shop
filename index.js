@@ -89,6 +89,17 @@ client.on('message', async (msg) => {
         `Evento "${checkReturn.eventName}" em andamento com ${checkReturn.eventCount} membros`,
       );
       break;
+      
+      case : "copyto"
+          msg.channel.send('coletando mensagens')
+          let filter = m => true;
+          let collector = new Discord.MessageCollector(msg.channel, filter)
+          collector.on('collect', (msg, col) => {
+            console.log  (`coletei a mensagem ${msg.content}`)
+          })
+      
+
+
 
     default:
       await msg.channel.send('Comando não encontrado');
