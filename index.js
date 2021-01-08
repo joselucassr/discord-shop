@@ -157,7 +157,7 @@ client.on('message', async (msg) => {
       break;
 
       case "ask":{
-        Client.users.get("292092550863388674").send("teste").
+        Client.users.get("292092550863388674").send("teste")
         }
         break;
 
