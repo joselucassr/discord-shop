@@ -98,17 +98,12 @@ const askMembers = async (users, askContent, client) => {
 };
 
 const getAnswers = async (msg, client) => {
-  console.log('entrou na função');
   // Check for active events
   const activeEvent = await Event.findOne({ event_is_active: true });
 
   if (!activeEvent) return 'noEvent';
 
-  console.log('passou o noEvent');
-
   if (!activeEvent.members_ids.includes(msg.author.id)) return 'null';
-
-  console.log('passou o includes');
 
   let destination = client.channels.cache.get('796946980843945984');
 
@@ -120,9 +115,7 @@ const getAnswers = async (msg, client) => {
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
       .setColor('#4affea');
 
-    console.log('chegou no destination');
     destination.send(embed);
-    console.log('passou do destination');
   }
 };
 

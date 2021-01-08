@@ -47,9 +47,7 @@ client.on('message', async (msg) => {
   if (msg.author.bot) return;
 
   // To get users answers
-  console.log(msg.channel.type);
   if (msg.channel.type === 'dm') {
-    console.log('entrou pra pedir a função');
     await getAnswers(msg, client);
   }
 
@@ -190,8 +188,6 @@ client.on('message', async (msg) => {
         }
       }
       break;
-
-    // client.channels.cache.get('796946980843945984').send(`coletei a mensagem ${msg.content}`);
 
     default:
       await msg.channel.send('Comando não encontrado');
