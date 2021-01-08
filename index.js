@@ -53,7 +53,8 @@ client.on('message', async (msg) => {
 
   // To get users answers
   if (msg.channel.type === 'dm') {
-    getAnswers(msg, client);
+    console.log('entrou pra pedir a função');
+    await getAnswers(msg, client);
   }
 
   switch (comando) {
