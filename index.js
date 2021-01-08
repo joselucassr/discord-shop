@@ -50,6 +50,11 @@ client.on('message', async (message) => {
         }ms.`,
       );
       break;
+
+      case 'join':
+        msg.author.send("teste");
+       break;
+
     default:
       await message.channel.send('Comando não encontrado');
   }
