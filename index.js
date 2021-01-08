@@ -36,6 +36,8 @@ client.on('ready', () => {
 client.on('message', async (message) => {
   if (message.author.bot) return;
 
+  if (message.content.substring(0, prefix.length) !== prefix) return;
+
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const comando = args.shift().toLocaleLowerCase();
 
