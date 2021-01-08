@@ -8,10 +8,16 @@ exports.run = async (Client, Message, args) => {
     let time_length = '';
     if (!Message.member.hasPermission('ADMINISTRATOR'))
       return Message.channel.send('você não pode iniciar sorteios.');
-    if (Message.content.split(' ')[1])
+
+    if (
+      !Message.content.split(' ')[1] ||
+      !Message.content.split(' ')[2] ||
+      !Message.content.split(' ')[3]
+    )
       return Message.channel.send(
         'Por favor siga o formato: ``e!sorteio (tempo) (id) (premio)``.',
       );
+
     const prize = Message.content.split(' ').slice(3).join(' ');
     let channel = Message.content.split(' ')[2];
     const started_time_duration_start = Message.content.split(' ')[1];
