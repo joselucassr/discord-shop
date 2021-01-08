@@ -66,7 +66,7 @@ client.on('message', async (msg) => {
 
       let eventName = msg.content.match(/"([^"]+)"/)[1];
 
-      eventName = eventName.toLowerCase;
+      eventName = eventName.toLowerCase();
       const eventNameCap =
         eventName.charAt(0).toUpperCase() + eventName.slice(1);
 
