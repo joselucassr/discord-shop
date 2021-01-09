@@ -101,8 +101,9 @@ exports.run = async (Client, Message, args) => {
   giveaway();
 };
 
-const sortCall = (msg) => {
-  let members = await msg.guild.channels.resolve(msg.content.split(/ +/)[1]).members;
+const sortCall = async (msg) => {
+  let members = await msg.guild.channels.resolve(msg.content.split(/ +/)[1])
+    .members;
 
   console.log(members);
   console.log(members.length);
