@@ -102,23 +102,30 @@ exports.run = async (Client, Message, args) => {
 };
 
 const sortCall = async (msg) => {
-  console.log('Entrou no sort');
+  try {
+    console.log('check voice');
+    console.log(!msg.member.voice);
+    console.log('check channel');
+    console.log(!msg.member.voice.channel);
 
-  if (!msg.member.voice.channel) return 'joinChannel';
-  console.log('antes do members');
-  let members = await msg.member.voice.channel.members;
+    if (!msg.member.voice.channel) return 'joinChannel';
+    console.log('antes do members');
+    let members = await msg.member.voice.channel.members;
 
-  console.log(members);
+    console.log(members);
 
-  if (members.length === 0) return 'noMembers';
-  console.log('get length');
+    if (members.length === 0) return 'noMembers';
+    console.log('get length');
 
-  let member = members[getRandomInt(1, members.length)];
-  console.log('Definiu member');
-  console.log(member);
+    let member = members[getRandomInt(1, members.length)];
+    console.log('Definiu member');
+    console.log(member);
 
-  console.log('Chegou no fim');
-  return { memberId: member.id };
+    console.log('Chegou no fim');
+    return { memberId: member.id };
+  } catch (err) {
+    console.error(err.message);
+  }
 };
 
 module.exports = {
