@@ -131,6 +131,7 @@ client.on('message', async (msg) => {
       break;
     }
     case 'entrar':
+    case 'join':
     case 'join_event': {
       const checkReturn = await joinEvent(msg.author.id);
 
@@ -145,35 +146,6 @@ client.on('message', async (msg) => {
       await msg.channel.send(`<@${msg.author.id}> entrou!`);
       break;
     }
-    case 'copyto':
-      msg.channel.send('coletando mensagens');
-      let counter = 0;
-      let filter = (m) => !m.author.bot;
-      let collector = new Discord.MessageCollector(msg.channel, filter);
-      let destination = client.channels.cache.get('796946980843945984');
-      collector.on('collect', (msg, col) => {
-        console.log(
-          `mensagem coletada: ${msg.content} e o autor dela é: ${msg.author.tag}`,
-        );
-
-        if (destination) {
-          let embed = new Discord.MessageEmbed()
-            .setTitle('nova mensagem')
-            .setDescription(msg.content)
-            .setTimestamp()
-            .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
-            .setColor('#4affea');
-
-          destination.send(embed);
-        }
-
-        counter++;
-        if (counter === 2) {
-          collector.stop();
-        }
-      });
-
-      break;
 
     case 'ask':
       {
@@ -192,7 +164,7 @@ client.on('message', async (msg) => {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
 
-        const checkReturn = await askMembers(client.users, askContent, client);
+        const checkReturn = await askMembers(client.users, askContent, msg);
 
         if (checkReturn === 'noEvent') {
           return msg.channel.send(`Não existe um evento em andamento`);

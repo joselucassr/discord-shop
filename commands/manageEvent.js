@@ -93,7 +93,7 @@ const joinEvent = async (discord_id) => {
   }
 };
 
-const askMembers = async (users, askContent, client) => {
+const askMembers = async (users, askContent, msg) => {
   try {
     // Check for active events
     const activeEvent = await Event.findOne({ event_is_active: true });
@@ -105,7 +105,12 @@ const askMembers = async (users, askContent, client) => {
     for (let i = 0; i < membersIds.length; i++) {
       const user = await users.fetch(membersIds[i], true);
 
-      await user.send(askContent);
+      user
+        .send(askContent)
+        .then()
+        .catch(() => {
+          msg.channel.send(`Não foi possível enviar para: ${user.tag}`);
+        });
     }
 
     activeEvent.event_accept_msg = true;
