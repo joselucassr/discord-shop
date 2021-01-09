@@ -49,6 +49,15 @@ client.on('ready', () => {
   console.log('I am ready to work!');
 });
 
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+  // const guild = newMember.guild;
+
+  console.log(oldMember.user);
+  console.log(newMember.user);
+
+  // continue with code
+});
+
 client.on('message', async (msg) => {
   // To get users answers
   if (msg.channel.type === 'dm') {
