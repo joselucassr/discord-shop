@@ -50,6 +50,7 @@ client.on('ready', () => {
 });
 
 client.on('guildMemberUpdate', (oldMember, newMember) => {
+  console.log('Called');
   // const guild = newMember.guild;
 
   console.log(oldMember.user);
