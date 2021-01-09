@@ -49,15 +49,16 @@ client.on('ready', () => {
   console.log('I am ready to work!');
 });
 
-client.on('guildMemberUpdate', (oldMember, newMember) => {
-  console.log('Called');
-  // const guild = newMember.guild;
+// Later work
+// client.on('guildMemberUpdate', (oldMember, newMember) => {
+//   console.log('Called');
+//   // const guild = newMember.guild;
 
-  console.log(oldMember.user);
-  console.log(newMember.user);
+//   console.log(oldMember.user);
+//   console.log(newMember.user);
 
-  // continue with code
-});
+//   // continue with code
+// });
 
 client.on('message', async (msg) => {
   // To get users answers
