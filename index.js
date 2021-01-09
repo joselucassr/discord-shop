@@ -68,7 +68,7 @@ client.on('message', async (msg) => {
 
   if (msg.channel.id === '796771494583074857') {
     if (
-      msg.content.toLowerCase() === 'ok' &&
+      msg.content.toLowerCase().startsWith('ok') &&
       msg.member.roles.cache.find((r) => r.id === '790239603436159006')
     ) {
       msg.channel.send(`OK: <@${msg.author.id}>`);
