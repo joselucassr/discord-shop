@@ -233,7 +233,7 @@ client.on('message', async (msg) => {
 
         let statusContent = msg.content.match(/"([^"]+)"/)[1].trim();
 
-        if (statusContent) {
+        if (!statusContent) {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
 
@@ -258,7 +258,7 @@ client.on('message', async (msg) => {
           }
           let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
   
-          if (statusTContent) {
+          if (!statusTContent) {
             return await msg.channel.send(`Por favor não deixe em branco!`);
           }
   
