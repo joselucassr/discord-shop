@@ -134,7 +134,10 @@ const getAnswers = async (msg, client) => {
       .setDescription(msg.content)
       .setImage(msg.attachments.first() && msg.attachments.first().url)
       .setTimestamp()
-      .setAuthor(msg.author.tag, msg.author.displayAvatarURL)
+      .setAuthor(
+        msg.content.startsWith('anônimo') ? 'Anônimo' : msg.author.tag,
+        msg.author.displayAvatarURL,
+      )
       .setColor('#4affea');
 
     destination.send(embed);
