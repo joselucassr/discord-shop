@@ -105,8 +105,8 @@ const sortCall = async (msg) => {
   let members = await msg.guild.channels.resolve(msg.content.split(/ +/)[1])
     .members;
 
-  console.log(members);
-  console.log(members.length);
+  members.map((m) => console.log(m));
+  // console.log(members.length);
 
   if (members.length === 0) return 'noMembers';
 
