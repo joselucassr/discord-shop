@@ -115,9 +115,11 @@ const sortCall = async (msg) => {
     if (members.length === 0) return 'noMembers';
     console.log('get length');
 
+    console.log(members.length);
+
     let member = members[getRandomInt(1, members.length)];
     console.log('Definiu member');
-    console.log(member);
+    console.log(member.user);
 
     console.log('Chegou no fim');
     return { memberId: member.id };
