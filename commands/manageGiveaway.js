@@ -1,5 +1,7 @@
 // const { Client, Message } = require('discord.js');
 
+const { getRandomInt } = require('../utils/math');
+
 const Discord = require('discord.js');
 let started_time_duration = '';
 let time_duration = '';
@@ -97,4 +99,18 @@ exports.run = async (Client, Message, args) => {
     }, time_duration);
   }
   giveaway();
+};
+
+const sortCall = (msg) => {
+  let members = msg.guild.channels.get(msg.content.split(/ +/)[1]).members;
+
+  if (members.length === 0) return 'noMembers';
+
+  let member = members[getRandomInt(1, members.length)];
+
+  return { memberId: member.id };
+};
+
+module.exports = {
+  sortCall,
 };
