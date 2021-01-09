@@ -103,6 +103,7 @@ exports.run = async (Client, Message, args) => {
 
 const sortCall = async (msg, client) => {
   try {
+    console.log('entrou na função');
     if (!msg.member.voice.channel) return 'joinChannel';
     let members = await msg.member.voice.channel.members.array();
 
