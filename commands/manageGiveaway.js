@@ -129,7 +129,7 @@ const sortCall = async (msg, client) => {
       }
       failsafe++;
       console.log('---------------');
-    } while (failsafe < 5 && isSorted < 1);
+    } while (failsafe < 10 && isSorted < 1);
 
     return { memberId: member.id };
   } catch (err) {
