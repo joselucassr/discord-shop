@@ -119,6 +119,7 @@ const sortCall = async (msg, client) => {
 
       console.log(member.id);
       console.log(member.bot);
+      console.log(member);
 
       let lastMsg = '';
       if (client.user.lastMessage) lastMsg = client.user.lastMessage.content;
