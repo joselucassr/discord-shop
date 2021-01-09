@@ -104,6 +104,9 @@ exports.run = async (Client, Message, args) => {
 const sortCall = (msg) => {
   let members = msg.guild.channels.resolve(msg.content.split(/ +/)[1]).members;
 
+  console.log(members);
+  console.log(members.length);
+
   if (members.length === 0) return 'noMembers';
 
   let member = members[getRandomInt(1, members.length)];
