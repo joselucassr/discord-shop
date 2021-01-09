@@ -216,12 +216,15 @@ client.on('message', async (msg) => {
         if (checkEvent === 'noMembers')
           return msg.channel.send(`Chamada vazia.`);
 
+        if (checkEvent === 'joinChannel')
+          return msg.channel.send(`Entre em uma chamada.`);
+
         msg.channel.send(`Sorteio da call: <@${checkReturn.memberId}>`);
       }
       break;
 
-      case 'stats':{
-        
+    case 'stats':
+      {
         let roleCheck = checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
@@ -244,32 +247,32 @@ client.on('message', async (msg) => {
           },
         });
       }
-        break;
+      break;
 
-        case 'stats_t': {
-        
-          let roleCheck = checkRole(msg);
-          if (roleCheck === 'noPerm') return;
-  
-          if (!msg.content.match(/"([^"]+)"/)) {
-            return await msg.channel.send(
-              `Por favor digite a mensagem que será colocada no status.`,
-            );
-          }
-          let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
-  
-          if (!statusTContent) {
-            return await msg.channel.send(`Por favor não deixe em branco!`);
-          }
-  
-          client.user.setPresence({
-            status: 'online',
-            activity: {
-              type: `${statusTContent}`,
-            },
-          });
-}
-          break;
+    case 'stats_t':
+      {
+        let roleCheck = checkRole(msg);
+        if (roleCheck === 'noPerm') return;
+
+        if (!msg.content.match(/"([^"]+)"/)) {
+          return await msg.channel.send(
+            `Por favor digite a mensagem que será colocada no status.`,
+          );
+        }
+        let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
+
+        if (!statusTContent) {
+          return await msg.channel.send(`Por favor não deixe em branco!`);
+        }
+
+        client.user.setPresence({
+          status: 'online',
+          activity: {
+            type: `${statusTContent}`,
+          },
+        });
+      }
+      break;
 
     // case 'sorteio':
     //   run(client, msg);
