@@ -213,10 +213,10 @@ client.on('message', async (msg) => {
       {
         const checkReturn = await sortCall(msg);
 
-        if (checkEvent === 'noMembers')
+        if (checkReturn === 'noMembers')
           return msg.channel.send(`Chamada vazia.`);
 
-        if (checkEvent === 'joinChannel')
+        if (checkReturn === 'joinChannel')
           return msg.channel.send(`Entre em uma chamada.`);
 
         msg.channel.send(`Sorteio da call: <@${checkReturn.memberId}>`);
@@ -248,7 +248,7 @@ client.on('message', async (msg) => {
         console.log (`${statusContent}`)
 
         let statusTContent = msg.content.match(/"([^"]+)"/)[2].trim();
-        
+
         if (!statusTContent) {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
@@ -259,11 +259,10 @@ client.on('message', async (msg) => {
           activity: {
             name: `${statusContent}`,
             type: `${statusTContent}`,
-
           },
         });
       }
-        break;
+      break;
 
     // case 'sorteio':
     //   run(client, msg);
