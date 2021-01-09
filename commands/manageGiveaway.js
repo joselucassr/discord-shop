@@ -101,13 +101,24 @@ exports.run = async (Client, Message, args) => {
   giveaway();
 };
 
-const sortCall = async (msg) => {
+const sortCall = async (msg, client) => {
   try {
     if (!msg.member.voice.channel) return 'joinChannel';
     let members = await msg.member.voice.channel.members.array();
 
     if (members.length === 0) return 'noMembers';
-    let member = members[getRandomInt(0, members.length - 1)];
+
+    let isSorted = false;
+
+    let member;
+
+    while (!isSorted) {
+      member = members[getRandomInt(0, members.length - 1)];
+
+      let lastMsg = client.user.lastMessage.content;
+
+      if (!lastMsg.includes(member.id) && member.bot === false) isSorted = true;
+    }
 
     return { memberId: member.id };
   } catch (err) {
