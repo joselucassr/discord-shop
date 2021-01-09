@@ -220,7 +220,7 @@ client.on('message', async (msg) => {
       }
       break;
 
-      case 'stats':
+      case 'stats':{
         
         let roleCheck = checkRole(msg);
         if (roleCheck === 'noPerm') return;
@@ -243,8 +243,10 @@ client.on('message', async (msg) => {
             name: `${statusContent}`,
           },
         });
+      }
+        break;
 
-        case 'stats_t':
+        case 'stats_t': {
         
           let roleCheck = checkRole(msg);
           if (roleCheck === 'noPerm') return;
@@ -254,7 +256,6 @@ client.on('message', async (msg) => {
               `Por favor digite a mensagem que será colocada no status.`,
             );
           }
-  
           let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
   
           if (statusTContent) {
@@ -267,6 +268,9 @@ client.on('message', async (msg) => {
               type: `${statusTContent}`,
             },
           });
+}
+          break;
+
     // case 'sorteio':
     //   run(client, msg);
     //   break;
