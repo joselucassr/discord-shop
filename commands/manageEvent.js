@@ -124,9 +124,9 @@ const getAnswers = async (msg, client) => {
   if (!activeEvent.members_ids.includes(msg.author.id)) return 'null';
   if (!activeEvent.event_accept_msg) return 'null';
 
- // let destination = client.channels.cache.get('796946980843945984');
- //let destination = client.channels.cache.get('796946980843945984');
- let destination = client.channels.cache.get('796473625418792970');
+  // let destination = client.channels.cache.get('796946980843945984');
+  // let destination = client.channels.cache.get('796946980843945984');
+  let destination = client.channels.cache.get('796473625418792970');
 
   if (destination) {
     let embed = new Discord.MessageEmbed()
@@ -164,7 +164,7 @@ const getMembers = async () => {
   let list = ``;
 
   for (let i = 0; i < membersIn.length; i++) {
-    list = list + `<@${membersIn[i]}>\n`;
+    list = list + `<@${membersIn[i]}> (${membersIn[i]})\n`;
   }
 
   return { list, isActive: event.event_is_active, name: event.event_name };
