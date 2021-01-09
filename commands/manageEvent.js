@@ -131,7 +131,7 @@ const getAnswers = async (msg, client) => {
 
   // let destination = client.channels.cache.get('796946980843945984');
   // let destination = client.channels.cache.get('796946980843945984');
-  let destination = client.channels.cache.get('796473625418792970');
+  let destination = client.channels.cache.get('797251638687563776');
 
   if (destination) {
     let embed = new Discord.MessageEmbed()
