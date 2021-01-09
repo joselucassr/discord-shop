@@ -112,7 +112,7 @@ const sortCall = async (msg, client) => {
 
     let member;
 
-    while (!isSorted) {
+    do {
       console.log('entrou aqui');
       console.log(isSorted);
       member = members[getRandomInt(0, members.length - 1)];
@@ -120,7 +120,7 @@ const sortCall = async (msg, client) => {
       let lastMsg = client.user.lastMessage.content;
 
       if (!lastMsg.includes(member.id) && member.bot === false) isSorted = true;
-    }
+    } while (!isSorted);
 
     return { memberId: member.id };
   } catch (err) {
