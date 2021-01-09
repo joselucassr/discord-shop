@@ -216,12 +216,15 @@ client.on('message', async (msg) => {
         if (checkEvent === 'noMembers')
           return msg.channel.send(`Chamada vazia.`);
 
+        if (checkEvent === 'joinChannel')
+          return msg.channel.send(`Entre em uma chamada.`);
+
         msg.channel.send(`Sorteio da call: <@${checkReturn.memberId}>`);
       }
       break;
 
-      case 'stats':{
-        
+    case 'stats':
+      {
         let roleCheck = checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
