@@ -214,9 +214,7 @@ client.on('message', async (msg) => {
         let roleCheck = checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
-        console.log('quase entrou na função');
-        const checkReturn = await sortCall(msg);
-        console.log('saiu da função');
+        const checkReturn = await sortCall(msg, client);
 
         if (checkReturn === 'noMembers')
           return msg.channel.send(`Chamada vazia.`);

@@ -103,7 +103,6 @@ exports.run = async (Client, Message, args) => {
 
 const sortCall = async (msg, client) => {
   try {
-    console.log('entrou na função');
     if (!msg.member.voice.channel) return 'joinChannel';
     let members = await msg.member.voice.channel.members.array();
 
@@ -114,9 +113,10 @@ const sortCall = async (msg, client) => {
     let member;
 
     do {
-      console.log('entrou aqui');
       console.log(isSorted);
+      console.log(client.user.lastMessage.content);
       member = members[getRandomInt(0, members.length - 1)];
+      console.log(member.id);
 
       let lastMsg = client.user.lastMessage.content;
 
