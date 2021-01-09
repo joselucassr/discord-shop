@@ -115,11 +115,11 @@ const sortCall = async (msg, client) => {
     do {
       console.log(isSorted);
       console.log(client.user);
-      console.log(client.user.lastMessage.content);
       member = members[getRandomInt(0, members.length - 1)];
       console.log(member.id);
 
-      let lastMsg = client.user.lastMessage.content;
+      let lastMsg = '';
+      if (client.user.lastMessage) lastMsg = client.user.lastMessage.content;
 
       if (!lastMsg.includes(member.id) && member.bot === false) isSorted = true;
     } while (!isSorted);
