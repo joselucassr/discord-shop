@@ -1,7 +1,7 @@
 const checkRole = (msg) => {
   if (
     msg.channel.type === 'dm' ||
-    !msg.member.roles.cache.find((r) => r.id === '796480236647612487')
+    !msg.member.roles.cache.find((r) => r.id === '790239605865185320')
   )
     return 'noPerm';
 };
