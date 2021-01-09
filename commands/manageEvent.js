@@ -109,7 +109,7 @@ const askMembers = async (users, askContent, msg) => {
         .send(askContent)
         .then()
         .catch(() => {
-          msg.channel.send(`Não foi possível enviar para: ${user.tag}`);
+          msg.channel.send(`Não foi possível enviar para: <@${user.id}>`);
         });
     }
 
