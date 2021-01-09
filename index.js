@@ -66,15 +66,15 @@ client.on('message', async (msg) => {
     await getAnswers(msg, client);
   }
 
-  if (msg.channel.id === '796771494583074857') {
-    if (
-      msg.content.toLowerCase().startsWith('ok') &&
-      msg.member.roles.cache.find((r) => r.id === '790239603436159006')
-    ) {
-      msg.channel.send(`OK: <@${msg.author.id}>`);
-    }
-    await getAnswers(msg, client);
-  }
+  // if (msg.channel.id === '796771494583074857') {
+  //   if (
+  //     msg.content.toLowerCase().startsWith('ok') &&
+  //     msg.member.roles.cache.find((r) => r.id === '790239603436159006')
+  //   ) {
+  //     msg.channel.send(`OK: <@${msg.author.id}>`);
+  //   }
+  //   await getAnswers(msg, client);
+  // }
 
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
