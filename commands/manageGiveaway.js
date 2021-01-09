@@ -102,11 +102,11 @@ exports.run = async (Client, Message, args) => {
 };
 
 const sortCall = async (msg) => {
-  let members = await msg.guild.channels.resolve(msg.content.split(/ +/)[1])
-    .members;
+  if (!msg.member.voice.channel) return 'joinChannel';
+  let members = await msg.member.voice.channel.members;
 
-  members.map((m) => console.log(m));
-  // console.log(members.length);
+  console.log(members.map);
+  console.log(members.length);
 
   if (members.length === 0) return 'noMembers';
 
