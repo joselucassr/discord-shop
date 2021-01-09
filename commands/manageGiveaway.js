@@ -120,6 +120,7 @@ const sortCall = async (msg, client) => {
 
       let lastMsg = '';
       if (client.user.lastMessage) lastMsg = client.user.lastMessage.content;
+      console.log(lastMsg);
 
       if (!lastMsg.includes(member.id) && member.bot === false) {
         isSorted++;
