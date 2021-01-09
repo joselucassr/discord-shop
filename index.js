@@ -65,6 +65,16 @@ client.on('message', async (msg) => {
     await getAnswers(msg, client);
   }
 
+  if (msg.channel.id === '797251638687563776') {
+    if (
+      msg.content.toLowerCase() === 'ok' &&
+      msg.member.roles.cache.find((r) => r.id === '790239603436159006')
+    ) {
+      msg.channel.send(`OK: <@${msg.author.id}>`);
+    }
+    await getAnswers(msg, client);
+  }
+
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
   const args = msg.content.slice(prefix.length).trim().split(/ +/);
