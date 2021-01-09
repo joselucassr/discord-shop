@@ -230,7 +230,7 @@ client.on('message', async (msg) => {
 
         if (!msg.content.match(/"([^"]+)"/)) {
           return await msg.channel.send(
-            `Por favor digite a mensagem que será colocada no status.`,
+            `Por favor digite a mensagem que será colocada no status no formato "mensagem" "type"`,
           );
         }
 
@@ -240,27 +240,8 @@ client.on('message', async (msg) => {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
 
-        client.user.setPresence({
-          status: 'online',
-          activity: {
-            name: `${statusContent}`,
-          },
-        });
-      }
-      break;
-
-    case 'stats_t':
-      {
-        let roleCheck = checkRole(msg);
-        if (roleCheck === 'noPerm') return;
-
-        if (!msg.content.match(/"([^"]+)"/)) {
-          return await msg.channel.send(
-            `Por favor digite a mensagem que será colocada no status.`,
-          );
-        }
-        let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
-
+        let statusTContent = msg.content.match(/"([^"]+)"/)[2].trim();
+        
         if (!statusTContent) {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
@@ -268,11 +249,13 @@ client.on('message', async (msg) => {
         client.user.setPresence({
           status: 'online',
           activity: {
+            name: `${statusContent}`,
             type: `${statusTContent}`,
+
           },
         });
       }
-      break;
+        break;
 
     // case 'sorteio':
     //   run(client, msg);
