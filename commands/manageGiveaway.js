@@ -108,7 +108,7 @@ const sortCall = async (msg) => {
 
     if (!msg.member.voice.channel) return 'joinChannel';
     console.log('antes do members');
-    let members = await msg.member.voice.channel.members;
+    let members = await msg.member.voice.channel.members.array();
 
     console.log(members);
 
