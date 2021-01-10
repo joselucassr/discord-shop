@@ -35,22 +35,18 @@ const pointEdit = async (msg) => {
   switch (op) {
     case '+':
       member.member_temp_fields[0] = currentPoints + amount;
-
-      await member.save();
       break;
     case '-':
       member.member_temp_fields[0] = currentPoints - amount;
-
-      await member.save();
       break;
     case '=':
       member.member_temp_fields[0] = amount;
-
-      await member.save();
       break;
     default:
       return msg.channel.send(`Você só pode usar (+ / - / =) como operadores.`);
   }
+
+  await member.save();
 
   return msg.channel.send(
     `Pontos de <@${memberId}>: ${member.member_temp_fields[0]}`,
