@@ -300,7 +300,7 @@ client.on('message', async (msg) => {
         let roleCheck = checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
-        pointEdit();
+        pointEdit(msg);
       }
       break;
 
