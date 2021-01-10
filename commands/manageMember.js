@@ -83,6 +83,7 @@ const pointsEdit = async (msg) => {
       member.member_temp_fields[0] = amount;
       break;
     default:
+      msg.delete();
       return msg.channel.send(`Você só pode usar (+ / - / =) como operadores.`);
   }
 
@@ -91,7 +92,7 @@ const pointsEdit = async (msg) => {
 
   msg.delete();
   return msg.channel.send(
-    `Pontos de <@${memberId}>: ${member.member_temp_fields[0]}`,
+    `Pontos de <@${memberId}> modificados (${op} ${amount}): ${member.member_temp_fields[0]}`,
   );
 };
 
