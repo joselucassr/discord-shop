@@ -74,7 +74,10 @@ client.on('message', async (msg) => {
     ) {
       msg.channel
         .send(`OK: <@${msg.author.id}>`)
-        .then((m) => m && m.delete({ timeout: 5000 }));
+        .then((m) => m && m.delete({ timeout: 5000 }))
+        .catch(() => {
+          return 0;
+        });
     }
   }
 
