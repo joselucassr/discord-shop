@@ -95,6 +95,7 @@ const joinEvent = async (author) => {
     if (member) {
       member.events_ids.push(activeEvent._id);
       member.member_updated_at = Date.now();
+      member.member_temp_fields = [];
       await member.save();
     } else {
       let memberFields = {
