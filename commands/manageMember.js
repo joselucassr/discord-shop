@@ -35,15 +35,17 @@ const singlePointsCheck = async (msg) => {
   msg.delete();
 
   const embed = new Discord.MessageEmbed()
-    .setTitle(`Pontos de <@${memberId}>:`)
-    .setDescription(`● **${member.member_temp_fields[0]}** Pontos`)
+    .setTitle(`Pontos Atuais:`)
+    .setDescription(
+      `● <@${memberId}> tem **${member.member_temp_fields[0]}** Pontos`,
+    )
     .setFooter('Enviado em:')
     .setTimestamp(Date.now())
     .setColor('#5bc0e3');
 
   return msg.channel
     .send(``, embed)
-    .then((m) => m && m.delete({ timeout: 10000 }))
+    .then((m) => m && m.delete({ timeout: 15000 }))
     .catch(() => {
       return 0;
     });
@@ -95,7 +97,7 @@ const allPointsCheck = async (msg) => {
 
   return msg.channel
     .send(``, embed)
-    .then((m) => m && m.delete({ timeout: 20000 }))
+    .then((m) => m && m.delete({ timeout: 40000 }))
     .catch(() => {
       return 0;
     });
@@ -167,9 +169,9 @@ const pointsEdit = async (msg, client) => {
   });
 
   const embed = new Discord.MessageEmbed()
-    .setTitle(`Pontos de <@${memberId}> modificados`)
+    .setTitle(`Pontos modificados`)
     .setDescription(
-      `● Operação: **${op}** \n● Quantidade: **${amount}** \n● Pontos Atuais: **${member.member_temp_fields[0]}**`,
+      `● Participante: <@${memberId}> \n● Operação: **${op}** \n● Quantidade: **${amount}** \n● Pontos Atuais: **${member.member_temp_fields[0]}**`,
     )
     .setFooter('Enviado em:')
     .setTimestamp(Date.now())
@@ -177,7 +179,7 @@ const pointsEdit = async (msg, client) => {
 
   return msg.channel
     .send(``, embed)
-    .then((m) => m && m.delete({ timeout: 10000 }))
+    .then((m) => m && m.delete({ timeout: 15000 }))
     .catch(() => {
       return 0;
     });
@@ -216,7 +218,12 @@ const resetPoints = async (msg) => {
     .setTimestamp(Date.now())
     .setColor('#5bc0e3');
 
-  return msg.channel.send(``, embed);
+  return msg.channel
+    .send(``, embed)
+    .then((m) => m && m.delete({ timeout: 15000 }))
+    .catch(() => {
+      return 0;
+    });
 };
 
 module.exports = {
