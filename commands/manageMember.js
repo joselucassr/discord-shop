@@ -10,7 +10,7 @@ const pointEdit = async (msg) => {
       `Por favor siga o formato: "e!pontuar (id) (+/-/=) (quantidade)".`,
     );
 
-  if (msg.mentions) {
+  if (msg.mentions.users.first()) {
     memberId = msg.mentions.users.first().id;
   } else {
     memberId = msg.content.split(/ +/)[1];
