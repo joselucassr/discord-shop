@@ -143,7 +143,7 @@ const pointsEdit = async (msg, client) => {
   await member.save();
 
   msg.delete();
-  logPoints(msg, client, {
+  logPoints(client, msg, {
     memberId,
     op,
     amount,
