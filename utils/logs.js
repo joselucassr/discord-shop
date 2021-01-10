@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 const logPoints = async (client, msg, args) => {
   let destination = client.channels.cache.get('797251638687563776');
 
