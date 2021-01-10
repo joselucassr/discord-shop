@@ -22,6 +22,8 @@ const {
 
 const { run, sortCall } = require('./commands/manageGiveaway');
 
+const { pointEdit } = require('./commands/manageMember');
+
 const { checkRole } = require('./utils/checker');
 
 // Define things
@@ -290,6 +292,15 @@ client.on('message', async (msg) => {
             type: `${statusTContent}`,
           },
         });
+      }
+      break;
+
+    case 'pontuar':
+      {
+        let roleCheck = checkRole(msg);
+        if (roleCheck === 'noPerm') return;
+
+        pointEdit();
       }
       break;
 
