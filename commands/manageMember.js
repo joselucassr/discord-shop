@@ -7,9 +7,10 @@ const pointEdit = async (msg) => {
 
   if (!op || !amount)
     return msg.channel.send(
-      `Por favor siga o formato: "e!pontuar (id) (+/-/=) (quantidade)".`,
+      `Por favor siga o formato: "e!pontuar (id) (+ / - / =) (quantidade)".`,
     );
 
+  // Get by mention or ID
   if (msg.mentions.users.first()) {
     memberId = msg.mentions.users.first().id;
   } else {
@@ -18,14 +19,42 @@ const pointEdit = async (msg) => {
 
   let member = await Member.findOne({ member_discord_id: memberId });
 
-  if (!member)
+  if (!member) {
     return msg.channel.send(
       `ID não encontrado, verifique se a pessoa entrou no evento.`,
     );
+  }
 
-  console.log(member);
-  console.log(op);
-  console.log(amount);
+  let currentPoints = member.member_temp_fields[0];
+
+  if (!currentPoints) currentPoints = '0';
+  currentPoints = parseInt(currentPoints);
+
+  amount = parseInt(amount);
+
+  switch (op) {
+    case '+':
+      member.member_temp_fields[0] = currentPoints + amount;
+
+      await member.save();
+      break;
+    case '-':
+      member.member_temp_fields[0] = currentPoints - amount;
+
+      await member.save();
+      break;
+    case '=':
+      member.member_temp_fields[0] = amount;
+
+      await member.save();
+      break;
+    default:
+      return msg.channel.send(`Você só pode usar (+ / - / =) como operadores.`);
+  }
+
+  return msg.channel.send(
+    `Pontos de <@${memberId}>: ${member.member_temp_fields[0]}`,
+  );
 };
 
 module.exports = {
