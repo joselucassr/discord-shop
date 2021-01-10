@@ -33,9 +33,20 @@ const singlePointsCheck = async (msg) => {
   }
 
   msg.delete();
-  return msg.channel.send(
-    `Pontos de <@${memberId}>: ${member.member_temp_fields[0]}`,
-  );
+
+  const embed = new Discord.MessageEmbed()
+    .setTitle(`Pontos de <@${memberId}>:`)
+    .setDescription(`● **${member.member_temp_fields[0]}** Pontos`)
+    .setFooter('Enviado em:')
+    .setTimestamp(Date.now())
+    .setColor('#5bc0e3');
+
+  return msg.channel
+    .send(``, embed)
+    .then((m) => m && m.delete({ timeout: 10000 }))
+    .catch(() => {
+      return 0;
+    });
 };
 
 const allPointsCheck = async (msg) => {
@@ -82,7 +93,12 @@ const allPointsCheck = async (msg) => {
     .setTimestamp(Date.now())
     .setColor('#5bc0e3');
 
-  return msg.channel.send(``, embed);
+  return msg.channel
+    .send(``, embed)
+    .then((m) => m && m.delete({ timeout: 20000 }))
+    .catch(() => {
+      return 0;
+    });
 };
 
 const pointsEdit = async (msg, client) => {
@@ -149,9 +165,22 @@ const pointsEdit = async (msg, client) => {
     amount,
     currentPoints: member.member_temp_fields[0],
   });
-  return msg.channel.send(
-    `Pontos de <@${memberId}> modificados **(${op} ${amount})**: **${member.member_temp_fields[0]}**`,
-  );
+
+  const embed = new Discord.MessageEmbed()
+    .setTitle(`Pontos de <@${memberId}> modificados`)
+    .setDescription(
+      `● Operação: **${op}** \n● Quantidade: **${amount}** \n● Pontos Atuais: **${member.member_temp_fields[0]}**`,
+    )
+    .setFooter('Enviado em:')
+    .setTimestamp(Date.now())
+    .setColor('#5bc0e3');
+
+  return msg.channel
+    .send(``, embed)
+    .then((m) => m && m.delete({ timeout: 10000 }))
+    .catch(() => {
+      return 0;
+    });
 };
 
 const resetPoints = async (msg) => {
