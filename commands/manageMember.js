@@ -32,8 +32,6 @@ const pointEdit = async (msg) => {
 
   amount = parseInt(amount);
 
-  console.log(currentPoints);
-
   switch (op) {
     case '+':
       member.member_temp_fields[0] = currentPoints + amount;
@@ -47,6 +45,8 @@ const pointEdit = async (msg) => {
     default:
       return msg.channel.send(`Você só pode usar (+ / - / =) como operadores.`);
   }
+
+  console.log(member);
 
   await member.save();
 
