@@ -303,10 +303,10 @@ client.on('message', async (msg) => {
     case 'ptr':
     case 'pontuar':
       {
-        let roleCheck = checkRole(msg, client);
+        let roleCheck = checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
-        pointsEdit(msg);
+        pointsEdit(msg, client);
       }
       break;
 
