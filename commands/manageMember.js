@@ -1,6 +1,14 @@
+// Models import
+const Event = require('../models/Event');
 const Member = require('../models/Member');
 
 const pointEdit = async (msg) => {
+  // Check for active events
+  const activeEvent = await Event.findOne({ event_is_active: true });
+
+  if (!activeEvent)
+    return msg.channel.send(`Não existe um evento em andamento.`);
+
   let memberId = '';
   let op = msg.content.split(/ +/)[2];
   let amount = msg.content.split(/ +/)[3];
@@ -19,7 +27,8 @@ const pointEdit = async (msg) => {
 
   const member = await Member.findOne({ member_discord_id: memberId });
 
-  if (!member) {
+  // Checks if user has a saved profile or if joined the event
+  if (!member || !member.events_ids.includes(activeEvent._id)) {
     return msg.channel.send(
       `ID não encontrado, verifique se a pessoa entrou no evento.`,
     );
