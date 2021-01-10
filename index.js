@@ -159,7 +159,7 @@ client.on('message', async (msg) => {
     case 'entrar':
     case 'join':
     case 'join_event': {
-      const checkReturn = await joinEvent(msg.author.id);
+      const checkReturn = await joinEvent(msg.author);
 
       if (checkReturn === 'noEvent') {
         return msg.channel.send(`Não existe um evento em andamento`);

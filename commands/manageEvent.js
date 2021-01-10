@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 
 // Models import
 const Event = require('../models/Event');
+const Member = require('../models/Member');
 
 const createEvent = async (name, client) => {
   try {
@@ -76,18 +77,35 @@ const stopEvent = async (client) => {
   }
 };
 
-const joinEvent = async (discord_id) => {
+const joinEvent = async (author) => {
   try {
     // Check for active events
     const activeEvent = await Event.findOne({ event_is_active: true });
 
     if (!activeEvent) return 'noEvent';
 
-    if (activeEvent.members_ids.includes(discord_id)) return 'alreadyIn';
+    if (activeEvent.members_ids.includes(author.id)) return 'alreadyIn';
 
-    activeEvent.members_ids.push(discord_id);
+    let member = await Member.findOne({ member_discord_id: author.id });
+
+    activeEvent.members_ids.push(author.id);
     activeEvent.event_updated_at = Date.now();
     await activeEvent.save();
+
+    if (member) {
+      member.events_ids.push(activeEvent._id);
+      member.member_updated_at = Date.now();
+      await member.save();
+    } else {
+      let memberFields = {
+        member_discord_id: author.id,
+        member_name: author.username,
+        events_ids: [activeEvent._id],
+      };
+
+      member = new Member(memberFields);
+      await member;
+    }
   } catch (err) {
     console.error(err.message);
   }
