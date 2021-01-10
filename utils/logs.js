@@ -5,9 +5,9 @@ const logPoints = async (client, msg, args) => {
 
   if (destination) {
     let embed = new Discord.MessageEmbed()
-      .setTitle(`Log: pontos modificados`)
+      .setTitle(`Log: Pontos modificados`)
       .setDescription(
-        `Pontos de <@${args.memberId}> modificados por <@${msg.author.id}> \nOperação: **${args.op}** \nQuantidade: **${args.amount}**) \nPontos Atuais: **${args.currentPoints}**`,
+        `● Pontos de <@${args.memberId}> modificados por <@${msg.author.id}> \n● Operação: **${args.op}** \n● Quantidade: **${args.amount}** \n● Pontos Atuais: **${args.currentPoints}**`,
       )
       .setTimestamp(Date.now())
       .setColor('#5bc0e3');
