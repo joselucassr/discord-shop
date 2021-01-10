@@ -33,6 +33,45 @@ const singlePointsCheck = async (msg) => {
   );
 };
 
+const allPointsCheck = async (msg) => {
+  // Check for active events
+  const activeEvent = await Event.findOne({ event_is_active: true });
+
+  if (!activeEvent)
+    return msg.channel.send(`Não existe um evento em andamento.`);
+
+  // Checks if user has a saved profile or if joined the event
+  if (activeEvent.members_ids.length === 0) {
+    return msg.channel.send(`Evento vazio.`);
+  }
+
+  let memberList = [];
+  let memberListMsg = '';
+
+  for (let i = 0; i < activeEvent.members_ids.length; i++) {
+    const member = await Member.findOne({
+      member_discord_id: activeEvent.members_ids[i],
+    });
+
+    let points = member.member_temp_fields[0];
+    if (!points) points = '0';
+    let memberId = member.member_discord_id;
+
+    memberList.push({ memberId, points });
+  }
+
+  memberList.sort((a, b) => b.points - a.points);
+
+  for (let i = 0; i < memberList.length; i++) {
+    memberListMsg =
+      memberListMsg +
+      `<@${memberList[i].memberId}> : ${memberList[i].points}\n`;
+  }
+
+  msg.delete();
+  return msg.channel.send(`**Lista de pontos:**\n ${memberListMsg}`);
+};
+
 const pointsEdit = async (msg) => {
   // Check for active events
   const activeEvent = await Event.findOne({ event_is_active: true });
@@ -99,4 +138,5 @@ const pointsEdit = async (msg) => {
 module.exports = {
   pointsEdit,
   singlePointsCheck,
+  allPointsCheck,
 };

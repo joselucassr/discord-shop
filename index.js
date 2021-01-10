@@ -22,7 +22,11 @@ const {
 
 const { run, sortCall } = require('./commands/manageGiveaway');
 
-const { pointsEdit, singlePointsCheck } = require('./commands/manageMember');
+const {
+  pointsEdit,
+  singlePointsCheck,
+  allPointsCheck,
+} = require('./commands/manageMember');
 
 const { checkRole } = require('./utils/checker');
 
@@ -307,6 +311,12 @@ client.on('message', async (msg) => {
     case 'pontos':
       {
         singlePointsCheck(msg);
+      }
+      break;
+
+    case 'lpontos':
+      {
+        allPointsCheck(msg);
       }
       break;
 
