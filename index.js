@@ -322,9 +322,11 @@ client.on('message', async (msg) => {
       }
       break;
 
-    case 'rpontos': {
-      resetPoints(msg);
-    }
+    case 'rpontos':
+      {
+        resetPoints(msg);
+      }
+      break;
 
     // case 'sorteio':
     //   run(client, msg);
