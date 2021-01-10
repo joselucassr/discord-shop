@@ -67,7 +67,7 @@ const allPointsCheck = async (msg) => {
   for (let i = 0; i < memberList.length; i++) {
     memberListMsg =
       memberListMsg +
-      `${i + 1}º - <@${memberList[i].memberId}> : ${memberList[i].points}\n`;
+      `${i + 1}º - <@${memberList[i].memberId}>: **${memberList[i].points}**\n`;
   }
 
   msg.delete();
@@ -141,7 +141,7 @@ const pointsEdit = async (msg) => {
 
   msg.delete();
   return msg.channel.send(
-    `Pontos de <@${memberId}> modificados (${op} ${amount}): ${member.member_temp_fields[0]}`,
+    `Pontos de <@${memberId}> modificados **(${op} ${amount})**: **${member.member_temp_fields[0]}**`,
   );
 };
 
