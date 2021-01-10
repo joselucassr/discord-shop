@@ -17,7 +17,7 @@ const pointEdit = async (msg) => {
     memberId = msg.content.split(/ +/)[1];
   }
 
-  let member = await Member.findOne({ member_discord_id: memberId });
+  const member = await Member.findOne({ member_discord_id: memberId });
 
   if (!member) {
     return msg.channel.send(
