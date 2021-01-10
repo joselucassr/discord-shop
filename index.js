@@ -72,7 +72,7 @@ client.on('message', async (msg) => {
       msg.member.roles.cache.find((r) => r.id === '790239603436159006') &&
       msg.author.bot === false
     ) {
-      msg.channel.send(`OK: <@${msg.author.id}>`);
+      msg.channel.send(`OK: <@${msg.author.id}>`).delete({ timeout: 5000 });
     }
   }
 
