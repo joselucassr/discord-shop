@@ -4,6 +4,9 @@ const Discord = require('discord.js');
 const Event = require('../models/Event');
 const Member = require('../models/Member');
 
+// Function imports
+const { logPoints } = require('../utils/logs');
+
 const singlePointsCheck = async (msg) => {
   // Check for active events
   const activeEvent = await Event.findOne({ event_is_active: true });
@@ -82,7 +85,7 @@ const allPointsCheck = async (msg) => {
   return msg.channel.send(``, embed);
 };
 
-const pointsEdit = async (msg) => {
+const pointsEdit = async (msg, client) => {
   // Check for active events
   const activeEvent = await Event.findOne({ event_is_active: true });
 
@@ -140,6 +143,12 @@ const pointsEdit = async (msg) => {
   await member.save();
 
   msg.delete();
+  logPoints(msg, client, {
+    memberId,
+    op,
+    amount,
+    currentPoints: member.member_temp_fields[0],
+  });
   return msg.channel.send(
     `Pontos de <@${memberId}> modificados **(${op} ${amount})**: **${member.member_temp_fields[0]}**`,
   );
