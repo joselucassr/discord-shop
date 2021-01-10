@@ -7,6 +7,11 @@ const MemberSchema = new mongoose.Schema({
   member_name: {
     type: String,
   },
+  member_temp_fields: [
+    {
+      type: String,
+    },
+  ],
   events_ids: [
     {
       type: String,
