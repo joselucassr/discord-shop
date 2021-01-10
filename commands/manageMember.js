@@ -42,7 +42,7 @@ const allPointsCheck = async (msg) => {
   if (!activeEvent)
     return msg.channel.send(`Não existe um evento em andamento.`);
 
-  // Checks if user has a saved profile or if joined the event
+  // Checks if event is empty
   if (activeEvent.members_ids.length === 0) {
     return msg.channel.send(`Evento vazio.`);
   }
@@ -145,8 +145,45 @@ const pointsEdit = async (msg) => {
   );
 };
 
+const resetPoints = async (msg) => {
+  // Check for active events
+  const activeEvent = await Event.findOne({ event_is_active: true });
+
+  if (!activeEvent)
+    return msg.channel.send(`Não existe um evento em andamento.`);
+
+  // Checks if event is empty
+  if (activeEvent.members_ids.length === 0) {
+    return msg.channel.send(`Evento vazio.`);
+  }
+
+  for (let i = 0; i < activeEvent.members_ids.length; i++) {
+    const member = await Member.findOne({
+      member_discord_id: activeEvent.members_ids[i],
+    });
+
+    member.member_temp_fields[0] = '0';
+    member.markModified('member_temp_fields');
+    await member.save();
+  }
+
+  msg.delete();
+
+  const embed = new Discord.MessageEmbed()
+    .setTitle(`Pontos reiniciados`)
+    .setDescription(
+      `Pontos reiniciados de **${activeEvent.members_ids.length}** participantes`,
+    )
+    .setFooter('Enviado em:')
+    .setTimestamp(Date.now())
+    .setColor('#5bc0e3');
+
+  return msg.channel.send(``, embed);
+};
+
 module.exports = {
   pointsEdit,
   singlePointsCheck,
   allPointsCheck,
+  resetPoints,
 };

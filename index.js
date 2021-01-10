@@ -26,6 +26,7 @@ const {
   pointsEdit,
   singlePointsCheck,
   allPointsCheck,
+  resetPoints,
 } = require('./commands/manageMember');
 
 const { checkRole } = require('./utils/checker');
@@ -320,6 +321,10 @@ client.on('message', async (msg) => {
         allPointsCheck(msg);
       }
       break;
+
+    case 'rpontos': {
+      resetPoints(msg);
+    }
 
     // case 'sorteio':
     //   run(client, msg);
