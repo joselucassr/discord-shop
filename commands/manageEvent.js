@@ -104,7 +104,7 @@ const joinEvent = async (author) => {
       };
 
       member = new Member(memberFields);
-      await member;
+      await member.save();
     }
   } catch (err) {
     console.error(err.message);
