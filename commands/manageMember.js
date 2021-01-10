@@ -5,7 +5,7 @@ const Event = require('../models/Event');
 const Member = require('../models/Member');
 
 // Function imports
-const { logPoints } = require('../utils/logs');
+const { logPoints, logResetPoints } = require('../utils/logs');
 
 const singlePointsCheck = async (msg) => {
   // Check for active events
@@ -185,7 +185,7 @@ const pointsEdit = async (msg, client) => {
     });
 };
 
-const resetPoints = async (msg) => {
+const resetPoints = async (msg, client) => {
   // Check for active events
   const activeEvent = await Event.findOne({ event_is_active: true });
 
@@ -195,6 +195,29 @@ const resetPoints = async (msg) => {
   // Checks if event is empty
   if (activeEvent.members_ids.length === 0) {
     return msg.channel.send(`Evento vazio.`);
+  }
+
+  let memberList = [];
+  let memberListMsg = '';
+
+  for (let i = 0; i < activeEvent.members_ids.length; i++) {
+    const member = await Member.findOne({
+      member_discord_id: activeEvent.members_ids[i],
+    });
+
+    let points = member.member_temp_fields[0];
+    if (!points) points = '0';
+    let memberId = member.member_discord_id;
+
+    memberList.push({ memberId, points });
+  }
+
+  memberList.sort((a, b) => b.points - a.points);
+
+  for (let i = 0; i < memberList.length; i++) {
+    memberListMsg =
+      memberListMsg +
+      `${i + 1}º - <@${memberList[i].memberId}>: **${memberList[i].points}**\n`;
   }
 
   for (let i = 0; i < activeEvent.members_ids.length; i++) {
@@ -209,10 +232,15 @@ const resetPoints = async (msg) => {
 
   msg.delete();
 
+  logResetPoints(client, msg, {
+    amount: activeEvent.members_ids.length,
+    memberListMsg,
+  });
+
   const embed = new Discord.MessageEmbed()
     .setTitle(`Pontos reiniciados`)
     .setDescription(
-      `Pontos reiniciados de **${activeEvent.members_ids.length}** participantes`,
+      `Pontos reiniciados de **${activeEvent.members_ids.length}** participantes \n**Pontos antes do reinício:** \n${memberListMsg}`,
     )
     .setFooter('Enviado em:')
     .setTimestamp(Date.now())

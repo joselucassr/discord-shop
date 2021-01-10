@@ -324,7 +324,10 @@ client.on('message', async (msg) => {
 
     case 'rpontos':
       {
-        resetPoints(msg);
+        let roleCheck = checkRole(msg);
+        if (roleCheck === 'noPerm') return;
+
+        resetPoints(msg, client);
       }
       break;
 
