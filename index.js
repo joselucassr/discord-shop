@@ -22,7 +22,7 @@ const {
 
 const { run, sortCall } = require('./commands/manageGiveaway');
 
-const { pointEdit } = require('./commands/manageMember');
+const { pointsEdit, singlePointsCheck } = require('./commands/manageMember');
 
 const { checkRole } = require('./utils/checker');
 
@@ -300,7 +300,13 @@ client.on('message', async (msg) => {
         let roleCheck = checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
-        pointEdit(msg);
+        pointsEdit(msg);
+      }
+      break;
+
+    case 'pontos':
+      {
+        singlePointsCheck(msg);
       }
       break;
 
