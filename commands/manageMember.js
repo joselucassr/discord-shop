@@ -46,6 +46,7 @@ const pointEdit = async (msg) => {
       return msg.channel.send(`Você só pode usar (+ / - / =) como operadores.`);
   }
 
+  member.member_temp_fields[0].toString();
   console.log(member);
 
   await member.save();
