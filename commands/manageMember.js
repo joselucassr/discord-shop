@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 // Models import
 const Event = require('../models/Event');
 const Member = require('../models/Member');
@@ -65,11 +67,19 @@ const allPointsCheck = async (msg) => {
   for (let i = 0; i < memberList.length; i++) {
     memberListMsg =
       memberListMsg +
-      `${i + 1} - <@${memberList[i].memberId}> : ${memberList[i].points}\n`;
+      `${i + 1}º - <@${memberList[i].memberId}> : ${memberList[i].points}\n`;
   }
 
   msg.delete();
-  return msg.channel.send(`**Lista de pontos:**\n${memberListMsg}`);
+
+  const embed = new Discord.MessageEmbed()
+    .setTitle(`Top pontos do evento`)
+    .setDescription(`${memberListMsg}`)
+    .setFooter('Enviado em:')
+    .setTimestamp(Date.now())
+    .setColor('#5bc0e3');
+
+  return msg.channel.send(`**Lista de pontos:**`, embed);
 };
 
 const pointsEdit = async (msg) => {

@@ -299,6 +299,7 @@ client.on('message', async (msg) => {
       }
       break;
 
+    case 'ptr':
     case 'pontuar':
       {
         let roleCheck = checkRole(msg);
