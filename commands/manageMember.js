@@ -79,7 +79,7 @@ const allPointsCheck = async (msg) => {
     .setTimestamp(Date.now())
     .setColor('#5bc0e3');
 
-  return msg.channel.send(`**Lista de pontos:**`, embed);
+  return msg.channel.send(``, embed);
 };
 
 const pointsEdit = async (msg) => {
