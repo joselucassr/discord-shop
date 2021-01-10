@@ -32,6 +32,8 @@ const pointEdit = async (msg) => {
 
   amount = parseInt(amount);
 
+  console.log(currentPoints);
+
   switch (op) {
     case '+':
       member.member_temp_fields[0] = currentPoints + amount;
