@@ -82,6 +82,9 @@ const detectMsg = async (msg) => {
   let activeEvent = await Event.findOne({ event_is_active: true });
   if (!activeEvent) return 0;
 
+  // Checks if the user has joined
+  if (!activeEvent.users_ids.includes(msg.author.id)) return 0;
+
   let field = activeEvent.event_temp_fields.find((e) => e.type === 'detectMsg');
   if (!field || !field.active) return 0;
 
