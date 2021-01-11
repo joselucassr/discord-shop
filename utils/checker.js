@@ -4,7 +4,7 @@ const Server = require('../models/Server');
 // Functions import
 const { simpleEmbed } = require('../utils/embed');
 
-const checkRole = (msg) => {
+const checkRole = async (msg) => {
   // Check if theres is a server
   let server = await Server.findOne({ server_discord_id: msg.guild.id });
 
@@ -25,7 +25,7 @@ const checkRole = (msg) => {
       'Você não tem permissão para executar este comando.',
     );
 
-    return 'noPerm'
+  return 'noPerm';
 };
 
 module.exports = {
