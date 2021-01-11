@@ -72,8 +72,7 @@ const updateServer = async (msg) => {
 
   switch (updating) {
     case 'event_tag': {
-      server.server_event_tag = arg_1;
-      server.markModified('server_event_tag');
+      server.server_event_role = arg_1;
       await server.save();
 
       return simpleEmbed(

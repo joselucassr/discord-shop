@@ -116,7 +116,7 @@ client.on('message', async (msg) => {
       break;
 
     case 'create':
-      let roleCheck = checkRole(msg);
+      let roleCheck = await checkRole(msg);
       if (roleCheck === 'noPerm') return;
 
       if (!msg.content.match(/"([^"]+)"/)) {
@@ -146,7 +146,7 @@ client.on('message', async (msg) => {
 
     case 'checar':
     case 'check': {
-      let roleCheck = checkRole(msg);
+      let roleCheck = await checkRole(msg);
       if (roleCheck === 'noPerm') return;
 
       const checkReturn = await checkEvent();
@@ -161,7 +161,7 @@ client.on('message', async (msg) => {
       break;
     }
     case 'stop_event': {
-      let roleCheck = checkRole(msg);
+      let roleCheck = await checkRole(msg);
       if (roleCheck === 'noPerm') return;
 
       const checkReturn = await stopEvent(client);
@@ -194,7 +194,7 @@ client.on('message', async (msg) => {
 
     case 'ask':
       {
-        let roleCheck = checkRole(msg);
+        let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
         if (!msg.content.match(/"([^"]+)"/)) {
@@ -224,7 +224,7 @@ client.on('message', async (msg) => {
       break;
     case 'stop_ask':
       {
-        let roleCheck = checkRole(msg);
+        let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
         const checkReturn = await stopAnswers();
@@ -241,7 +241,7 @@ client.on('message', async (msg) => {
 
     case 'get_members':
       {
-        let roleCheck = checkRole(msg);
+        let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
         const checkReturn = await getMembers();
@@ -256,7 +256,7 @@ client.on('message', async (msg) => {
 
     case 'sortcall':
       {
-        let roleCheck = checkRole(msg);
+        let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
         const checkReturn = await sortCall(msg, client);
@@ -274,7 +274,7 @@ client.on('message', async (msg) => {
     case 'stats':
       console.log('entrei');
       {
-        let roleCheck = checkRole(msg);
+        let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
         console.log('pessei pelo role check');
@@ -315,7 +315,7 @@ client.on('message', async (msg) => {
     case 'ptr':
     case 'pontuar':
       {
-        let roleCheck = checkRole(msg);
+        let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
         pointsEdit(msg, client);
@@ -336,7 +336,7 @@ client.on('message', async (msg) => {
 
     case 'rpontos':
       {
-        let roleCheck = checkRole(msg);
+        let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
         resetPoints(msg, client);
