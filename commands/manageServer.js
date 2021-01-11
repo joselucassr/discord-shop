@@ -44,7 +44,52 @@ const startServer = async (msg) => {
     console.error(err.message);
   }
 };
-const updateServer = async (msg) => {};
+const updateServer = async (msg) => {
+  msg.delete();
+  // Check if theres is a server
+  let server = await Server.findOne({ server_discord_id: msg.guild.id });
+
+  if (!server)
+    return simpleEmbed(
+      msg,
+      'Não foi possível atualizar:',
+      'O servidor precisa ser iniciado.',
+    );
+
+  if (
+    !msg.member.hasPermission('ADMINISTRATOR') &&
+    !msg.member.roles.cache.find((r) => r.id === server.server_event_role)
+  ) {
+    return simpleEmbed(
+      msg,
+      'Sem permissão:',
+      'Você não tem permissão para executar este comando.',
+    );
+  }
+
+  let updating = msg.content.split(/ +/)[1];
+  let arg_1 = msg.content.split(/ +/)[2];
+
+  switch (updating) {
+    case 'event_tag': {
+      server.server_event_tag = arg_1;
+      await server();
+
+      return simpleEmbed(
+        msg,
+        'Configuração atualizada:',
+        `Tag da equipe de eventos atualizada para <@&${arg_1}>`,
+      );
+    }
+
+    default:
+      return simpleEmbed(
+        msg,
+        'Argumento inválido:',
+        'Digite o que deseja atualizar.',
+      );
+  }
+};
 
 module.exports = {
   startServer,
