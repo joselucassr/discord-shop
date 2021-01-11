@@ -48,7 +48,7 @@ const setDetectMsg = async (msg) => {
       return obj;
     });
 
-    activeEvent.event_temp_fields.push(newFields);
+    activeEvent.event_temp_fields = newFields;
     activeEvent.markModified('event_temp_fields');
     await activeEvent.save();
   } else {
