@@ -17,6 +17,7 @@ const setDetectMsg = async (msg) => {
 
   if (!msg.content.match(/"([^"]+)"/)) {
     return simpleEmbed(
+      msg,
       'Comando incorreto:',
       `Por favor digite a mensagem que será colocada no status no formato **e!dmsg "msg"**`,
     );
@@ -25,7 +26,11 @@ const setDetectMsg = async (msg) => {
   let msgToDetect = msg.content.match(/"([^"]+)"/)[1].trim();
 
   if (!msgToDetect) {
-    return simpleEmbed('Comando incorreto:', `Não deixe a mensagem em branco.`);
+    return simpleEmbed(
+      msg,
+      'Comando incorreto:',
+      `Não deixe a mensagem em branco.`,
+    );
   }
 
   msgToDetect = msgToDetect.toLowerCase();
@@ -41,6 +46,7 @@ const setDetectMsg = async (msg) => {
   await activeEvent.save();
 
   return simpleEmbed(
+    msg,
     'Mensagem configurada:',
     `A mensagem **"${msgToDetect}"** foi adicionada.`,
   );
