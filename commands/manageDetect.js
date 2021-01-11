@@ -8,6 +8,7 @@ const Member = require('../models/Member');
 const { simpleEmbed } = require('../utils/embed');
 
 const setDetectMsg = async (msg) => {
+  msg.delete();
   // Check for active events
   let activeEvent = await Event.findOne({ event_is_active: true });
 
@@ -23,6 +24,12 @@ const setDetectMsg = async (msg) => {
 
   let msgToDetect = msg.content.match(/"([^"]+)"/)[1].trim();
 
+  if (!msgToDetect) {
+    return simpleEmbed('Comando incorreto:', `Não deixe a mensagem em branco.`);
+  }
+
+  msgToDetect = msgToDetect.toLowerCase();
+
   let detectFields = {
     type: 'detectMsg',
     value: msgToDetect,
@@ -30,7 +37,7 @@ const setDetectMsg = async (msg) => {
   };
 
   activeEvent.event_temp_fields.push(detectFields);
-  activeEvent.event_temp_fields.markModified('event_temp_fields');
+  activeEvent.markModified('event_temp_fields');
   await activeEvent.save();
 
   return simpleEmbed(
