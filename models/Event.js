@@ -10,6 +10,7 @@ const EventSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  event_temp_fields: [],
   event_is_active: {
     type: Boolean,
     default: true,
