@@ -82,6 +82,17 @@ const updateServer = async (msg) => {
       );
     }
 
+    case 'log_channel': {
+      server.server_log_channel = arg_1;
+      await server.save();
+
+      return simpleEmbed(
+        msg,
+        'Configuração atualizada:',
+        `Canal de logs atualizado para <#${arg_1}>`,
+      );
+    }
+
     default:
       return simpleEmbed(
         msg,
