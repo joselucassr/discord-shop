@@ -314,6 +314,32 @@ client.on('message', async (msg) => {
       }
       break;
 
+      case 'sts_t':
+        {
+          let roleCheck = await checkRole(msg);
+          if (roleCheck === 'noPerm') return;
+  
+  
+          if (!msg.content.match(/"([^"]+)"/)) {
+            return await msg.channel.send(
+              `Por favor digite a mensagem que será colocada no status no formato  "type"`,
+            );
+          }
+  
+          let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
+  
+          if (!statusTContent) {
+            return await msg.channel.send(`Por favor não deixe em branco!`);
+          }
+          client.user.setPresence({
+            status: 'online',
+            activity: {
+              type: `${statusTContent}`,
+            },
+          });
+        }
+        break;
+
     case 'ptr':
     case 'pontuar':
       {
