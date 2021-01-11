@@ -29,7 +29,7 @@ const {
   resetPoints,
 } = require('./commands/manageMember');
 
-const { startServer } = require('./commands/manageServer');
+const { startServer, updateServer } = require('./commands/manageServer');
 
 const { checkRole } = require('./utils/checker');
 
@@ -99,6 +99,11 @@ client.on('message', async (msg) => {
     case 'startup':
       {
         startServer(msg);
+      }
+      break;
+    case 'update':
+      {
+        updateServer(msg);
       }
       break;
     case 'ping':
