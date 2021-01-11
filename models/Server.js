@@ -12,6 +12,9 @@ const ServerSchema = new mongoose.Schema({
   server_event_channel: {
     type: String,
   },
+  server_log_channel: {
+    type: String,
+  },
   server_event_role: {
     type: String,
   },
