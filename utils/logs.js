@@ -1,7 +1,19 @@
 const Discord = require('discord.js');
 
+const Server = require('../models/Server');
+
 const logPoints = async (client, msg, args) => {
-  let destination = client.channels.cache.get('797251638687563776');
+  // Check if theres is a server
+  let server = await Server.findOne({ server_discord_id: msg.guild.id });
+
+  if (!server)
+    return simpleEmbed(
+      msg,
+      'Não foi possível atualizar:',
+      'O servidor precisa ser iniciado.',
+    );
+
+  let destination = client.channels.cache.get(server.server_log_channel);
 
   if (destination) {
     let embed = new Discord.MessageEmbed()
@@ -17,7 +29,17 @@ const logPoints = async (client, msg, args) => {
 };
 
 const logResetPoints = async (client, msg, args) => {
-  let destination = client.channels.cache.get('797251638687563776');
+  // Check if theres is a server
+  let server = await Server.findOne({ server_discord_id: msg.guild.id });
+
+  if (!server)
+    return simpleEmbed(
+      msg,
+      'Não foi possível atualizar:',
+      'O servidor precisa ser iniciado.',
+    );
+
+  let destination = client.channels.cache.get(server.server_log_channel);
 
   if (destination) {
     let embed = new Discord.MessageEmbed()
