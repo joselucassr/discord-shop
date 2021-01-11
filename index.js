@@ -69,6 +69,10 @@ client.on('ready', () => {
 //   // continue with code
 // });
 
+client.on('guildUpdate', async (oldGuild, newGuild) => {
+  updateServer({}, newGuild);
+});
+
 client.on('message', async (msg) => {
   // To get users answers
   if (msg.channel.type === 'dm') {

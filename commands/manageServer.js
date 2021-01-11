@@ -44,8 +44,13 @@ const startServer = async (msg) => {
     console.error(err.message);
   }
 };
-const updateServer = async (msg) => {
+const updateServer = async (msg, newGuild) => {
   msg.delete();
+  if (!msg) {
+    let guild = newGuild;
+    console.log(guild);
+  }
+
   // Check if theres is a server
   let server = await Server.findOne({ server_discord_id: msg.guild.id });
 
