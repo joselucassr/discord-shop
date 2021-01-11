@@ -77,7 +77,7 @@ client.on('guildUpdate', async (oldGuild, newGuild) => {
 
 client.on('message', async (msg) => {
   // Setting the msg detector
-  detectMsg();
+  detectMsg(msg);
 
   // To get users answers
   if (msg.channel.type === 'dm') {
