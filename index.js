@@ -90,12 +90,12 @@ client.on('message', async (msg) => {
       msg.member.roles.cache.find((r) => r.id === '790239603436159006') &&
       msg.author.bot === false
     ) {
-      msg.channel
-        .send(`OK: <@${msg.author.id}>`)
-        .then((m) => m && m.delete({ timeout: 300000 }))
-        .catch(() => {
-          return 0;
-        });
+      // msg.channel
+      //   .send(`OK: <@${msg.author.id}>`)
+      //   .then((m) => m && m.delete({ timeout: 300000 }))
+      //   .catch(() => {
+      //     return 0;
+      //   });
     }
   }
 
