@@ -70,6 +70,8 @@ client.on('ready', () => {
 // });
 
 client.on('guildUpdate', async (oldGuild, newGuild) => {
+  console.log(newGuild);
+  console.log('Antes');
   updateServer({}, newGuild);
 });
 
