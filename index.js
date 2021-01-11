@@ -276,12 +276,10 @@ client.on('message', async (msg) => {
       break;
 
     case 'stats':
-      console.log('entrei');
       {
         let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
-        console.log('pessei pelo role check');
 
         if (!msg.content.match(/"([^"]+)"/)) {
           return await msg.channel.send(
@@ -289,32 +287,56 @@ client.on('message', async (msg) => {
           );
         }
 
-        console.log('pessei pelo content match');
-
         let statusContent = msg.content.match(/"([^"]+)"/)[1].trim();
 
         if (!statusContent) {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
 
-        console.log(`${statusContent}`);
+  /*       console.log(`${statusContent}`);
 
         let statusTContent = msg.content.match(/"([^"]+)"/)[2].trim();
 
         if (!statusTContent) {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
-        console.log('terminei');
+        console.log('terminei');*/
 
         client.user.setPresence({
           status: 'online',
           activity: {
             name: `${statusContent}`,
-            type: `${statusTContent}`,
+            type: `PLAYING`,
           },
         });
       }
       break;
+
+      case 'sts_t':
+        {
+          let roleCheck = await checkRole(msg);
+          if (roleCheck === 'noPerm') return;
+  
+  
+          if (!msg.content.match(/"([^"]+)"/)) {
+            return await msg.channel.send(
+              `Por favor digite a mensagem que será colocada no status no formato  "type"`,
+            );
+          }
+  
+          let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
+  
+          if (!statusTContent) {
+            return await msg.channel.send(`Por favor não deixe em branco!`);
+          }
+          client.user.setPresence({
+            status: 'online',
+            activity: {
+              type: `${statusTContent}`,
+            },
+          });
+        }
+        break;
 
     case 'ptr':
     case 'pontuar':
