@@ -36,15 +36,33 @@ const setDetectMsg = async (msg) => {
 
   msgToDetect = msgToDetect.toLowerCase();
 
-  let detectFields = {
-    type: 'detectMsg',
-    value: msgToDetect,
-    active: true,
-  };
+  // Updating
+  if (activeEvent.event_temp_fields.find((e) => e.type === 'detectMsg')) {
+    let newFields = activeEvent.event_temp_fields.map((obj) => {
+      if (obj.type === 'detectMsg')
+        return {
+          ...obj,
+          value: msgToDetect,
+          active: true,
+        };
+      return obj;
+    });
 
-  activeEvent.event_temp_fields.push(detectFields);
-  activeEvent.markModified('event_temp_fields');
-  await activeEvent.save();
+    activeEvent.event_temp_fields.push(newFields);
+    activeEvent.markModified('event_temp_fields');
+    await activeEvent.save();
+  } else {
+    // Creating
+    let detectFields = {
+      type: 'detectMsg',
+      value: msgToDetect,
+      active: true,
+    };
+
+    activeEvent.event_temp_fields.push(detectFields);
+    activeEvent.markModified('event_temp_fields');
+    await activeEvent.save();
+  }
 
   return simpleEmbed(
     msg,
