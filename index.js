@@ -31,7 +31,7 @@ const {
 
 const { startServer, updateServer } = require('./commands/manageServer');
 
-const { setDetectMsg } = require('./commands/manageDetect');
+const { setDetectMsg, detectMsg } = require('./commands/manageDetect');
 
 const { checkRole } = require('./utils/checker');
 
@@ -76,6 +76,9 @@ client.on('guildUpdate', async (oldGuild, newGuild) => {
 });
 
 client.on('message', async (msg) => {
+  // Setting the msg detector
+  detectMsg();
+
   // To get users answers
   if (msg.channel.type === 'dm') {
     await getAnswers(msg, client);
