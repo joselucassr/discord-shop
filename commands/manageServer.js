@@ -18,7 +18,7 @@ const startServer = async (msg) => {
     // }
 
     // Check if has already start up
-    const server = await Server.findOne({ server_discord_id: msg.guild.id });
+    let server = await Server.findOne({ server_discord_id: msg.guild.id });
 
     if (server)
       return simpleEmbed(
