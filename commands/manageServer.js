@@ -9,13 +9,13 @@ const { simpleEmbed } = require('../utils/embed');
 const startServer = async (msg) => {
   try {
     msg.delete();
-    // if (!msg.member.hasPermission('ADMINISTRATOR')) {
-    //   return simpleEmbed(
-    //     msg,
-    //     'Sem permissão:',
-    //     'Você não tem permissão para executar este comando.',
-    //   );
-    // }
+    if (!msg.member.hasPermission('ADMINISTRATOR')) {
+      return simpleEmbed(
+        msg,
+        'Sem permissão:',
+        'Você não tem permissão para executar este comando.',
+      );
+    }
 
     // Check if has already start up
     let server = await Server.findOne({ server_discord_id: msg.guild.id });
