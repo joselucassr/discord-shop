@@ -29,6 +29,8 @@ const {
   resetPoints,
 } = require('./commands/manageMember');
 
+const { startServer } = require('./commands/manageServer');
+
 const { checkRole } = require('./utils/checker');
 
 // Define things
@@ -94,6 +96,11 @@ client.on('message', async (msg) => {
   const comando = args.shift().toLocaleLowerCase();
 
   switch (comando) {
+    case 'startup':
+      {
+        startServer(msg);
+      }
+      break;
     case 'ping':
       const m = await msg.channel.send('ping?');
       m.edit(
