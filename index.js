@@ -31,6 +31,8 @@ const {
 
 const { startServer, updateServer } = require('./commands/manageServer');
 
+const { setDetectMsg } = require('./commands/manageDetect');
+
 const { checkRole } = require('./utils/checker');
 
 // Define things
@@ -280,7 +282,6 @@ client.on('message', async (msg) => {
         let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
-
         if (!msg.content.match(/"([^"]+)"/)) {
           return await msg.channel.send(
             `Por favor digite a mensagem que será colocada no status no formato "mensagem" "type"`,
@@ -293,7 +294,7 @@ client.on('message', async (msg) => {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
 
-  /*       console.log(`${statusContent}`);
+        /*       console.log(`${statusContent}`);
 
         let statusTContent = msg.content.match(/"([^"]+)"/)[2].trim();
 
@@ -312,33 +313,32 @@ client.on('message', async (msg) => {
       }
       break;
 
-      case 'sts_t':
-        {
-          let roleCheck = await checkRole(msg);
-          if (roleCheck === 'noPerm') return;
-  
-  
-          if (!msg.content.match(/"([^"]+)"/)) {
-            return await msg.channel.send(
-              `Por favor digite a mensagem que será colocada no status no formato  "type"`,
-            );
-          }
-  
-          let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
-  
-          if (!statusTContent) {
-            return await msg.channel.send(`Por favor não deixe em branco!`);
-          }
+    case 'sts_t':
+      {
+        let roleCheck = await checkRole(msg);
+        if (roleCheck === 'noPerm') return;
 
-        console.log(typeof statusTContent)
-          client.user.setPresence({
-            status: 'online',
-            activity: {
-              type: `${statusTContent}`,
-            },
-          });
+        if (!msg.content.match(/"([^"]+)"/)) {
+          return await msg.channel.send(
+            `Por favor digite a mensagem que será colocada no status no formato  "type"`,
+          );
         }
-        break;
+
+        let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
+
+        if (!statusTContent) {
+          return await msg.channel.send(`Por favor não deixe em branco!`);
+        }
+
+        console.log(typeof statusTContent);
+        client.user.setPresence({
+          status: 'online',
+          activity: {
+            type: `${statusTContent}`,
+          },
+        });
+      }
+      break;
 
     case 'ptr':
     case 'pontuar':
@@ -368,6 +368,14 @@ client.on('message', async (msg) => {
         if (roleCheck === 'noPerm') return;
 
         resetPoints(msg, client);
+      }
+      break;
+    case 'dmsg':
+      {
+        let roleCheck = await checkRole(msg);
+        if (roleCheck === 'noPerm') return;
+
+        setDetectMsg(msg);
       }
       break;
 
