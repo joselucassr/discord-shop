@@ -329,6 +329,8 @@ client.on('message', async (msg) => {
           if (!statusTContent) {
             return await msg.channel.send(`Por favor não deixe em branco!`);
           }
+
+        console.log(typeof statusTContent)
           client.user.setPresence({
             status: 'online',
             activity: {
