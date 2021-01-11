@@ -18,14 +18,15 @@ const checkRole = async (msg) => {
   if (
     msg.channel.type === 'dm' ||
     !msg.member.roles.cache.find((r) => r.id === server.server_event_role)
-  )
+  ) {
     simpleEmbed(
       msg,
       'Sem permissão:',
       'Você não tem permissão para executar este comando.',
     );
 
-  return 'noPerm';
+    return 'noPerm';
+  }
 };
 
 module.exports = {
