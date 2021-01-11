@@ -47,7 +47,7 @@ const startServer = async (msg) => {
 const updateServer = async (msg, newGuild) => {
   if (newGuild) {
     let guild = newGuild;
-    return console.log(guild);
+    return console.log(guild.name);
   }
 
   msg.delete();
