@@ -47,7 +47,15 @@ const startServer = async (msg) => {
 const updateServer = async (msg, newGuild) => {
   if (newGuild) {
     let guild = newGuild;
-    return console.log(guild.name);
+
+    let server = await Server.findOne({ server_discord_id: guild.id });
+
+    if (!server) return 0;
+
+    server.server_name = guild.name;
+    await server.save();
+
+    return 0;
   }
 
   msg.delete();
