@@ -31,6 +31,8 @@ const {
 
 const { startServer, updateServer } = require('./commands/manageServer');
 
+const { setDetectMsg, detectMsg } = require('./commands/manageDetect');
+
 const { checkRole } = require('./utils/checker');
 
 // Define things
@@ -74,6 +76,9 @@ client.on('guildUpdate', async (oldGuild, newGuild) => {
 });
 
 client.on('message', async (msg) => {
+  // Setting the msg detector
+  detectMsg(msg);
+
   // To get users answers
   if (msg.channel.type === 'dm') {
     await getAnswers(msg, client);
@@ -85,12 +90,12 @@ client.on('message', async (msg) => {
       msg.member.roles.cache.find((r) => r.id === '790239603436159006') &&
       msg.author.bot === false
     ) {
-      msg.channel
-        .send(`OK: <@${msg.author.id}>`)
-        .then((m) => m && m.delete({ timeout: 300000 }))
-        .catch(() => {
-          return 0;
-        });
+      // msg.channel
+      //   .send(`OK: <@${msg.author.id}>`)
+      //   .then((m) => m && m.delete({ timeout: 300000 }))
+      //   .catch(() => {
+      //     return 0;
+      //   });
     }
   }
 
@@ -364,6 +369,14 @@ client.on('message', async (msg) => {
         if (roleCheck === 'noPerm') return;
 
         resetPoints(msg, client);
+      }
+      break;
+    case 'dmsg':
+      {
+        let roleCheck = await checkRole(msg);
+        if (roleCheck === 'noPerm') return;
+
+        setDetectMsg(msg);
       }
       break;
 

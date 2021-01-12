@@ -106,6 +106,17 @@ const updateServer = async (msg, newGuild) => {
       );
     }
 
+    case 'event_channel': {
+      server.server_event_channel = arg_1;
+      await server.save();
+
+      return simpleEmbed(
+        msg,
+        'Configuração atualizada:',
+        `Canal de eventos atualizado para <#${arg_1}>`,
+      );
+    }
+
     default:
       return simpleEmbed(
         msg,
