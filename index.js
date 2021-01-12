@@ -113,9 +113,7 @@ client.on('message', async (msg) => {
     case 'ping':
       const m = await msg.channel.send('ping?');
       m.edit(
-        `pong!! A latência é de ${
-          m.createdTimestamp - msg.createdTimestamp
-        }ms.`,
+        `pong!! A latência é de ${m.createdTimestamp - msg.createdTimestamp}ms.`
       );
       break;
 
@@ -125,7 +123,7 @@ client.on('message', async (msg) => {
 
       if (!msg.content.match(/"([^"]+)"/)) {
         return await msg.channel.send(
-          `Por favor digite um nome para o evento entre áspas`,
+          `Por favor digite um nome para o evento entre áspas`
         );
       }
 
@@ -160,7 +158,7 @@ client.on('message', async (msg) => {
       }
 
       await msg.channel.send(
-        `Evento: "${checkReturn.eventName}" \nMembros: ${checkReturn.memberCount} \nRecebendo resposta: ${checkReturn.acceptMsg}`,
+        `Evento: "${checkReturn.eventName}" \nMembros: ${checkReturn.memberCount} \nRecebendo resposta: ${checkReturn.acceptMsg}`
       );
       break;
     }
@@ -175,7 +173,7 @@ client.on('message', async (msg) => {
       }
 
       await msg.channel.send(
-        `O evento "${checkReturn.eventName}" foi encerrado e contou com ${checkReturn.memberCount} membros`,
+        `O evento "${checkReturn.eventName}" foi encerrado e contou com ${checkReturn.memberCount} membros`
       );
       break;
     }
@@ -203,7 +201,7 @@ client.on('message', async (msg) => {
 
         if (!msg.content.match(/"([^"]+)"/)) {
           return await msg.channel.send(
-            `Por favor digite a mensagem que será enviada.`,
+            `Por favor digite a mensagem que será enviada.`
           );
         }
 
@@ -221,7 +219,7 @@ client.on('message', async (msg) => {
 
         if (checkReturn === 'allSent') {
           return msg.channel.send(
-            `Mensagem enviada a todos, recebendo respostas`,
+            `Mensagem enviada a todos, recebendo respostas`
           );
         }
       }
@@ -253,7 +251,7 @@ client.on('message', async (msg) => {
         msg.channel.send(
           `Participantes do evento: **${checkReturn.name}** (*${
             checkReturn.isActive ? 'Ativo' : 'Finalizado'
-          }*) \n${checkReturn.list}`,
+          }*) \n${checkReturn.list}`
         );
       }
       break;
@@ -280,10 +278,9 @@ client.on('message', async (msg) => {
         let roleCheck = await checkRole(msg);
         if (roleCheck === 'noPerm') return;
 
-
         if (!msg.content.match(/"([^"]+)"/)) {
           return await msg.channel.send(
-            `Por favor digite a mensagem que será colocada no status no formato "mensagem" "type"`,
+            `Por favor digite a mensagem que será colocada no status no formato "mensagem" "type"`
           );
         }
 
@@ -293,7 +290,7 @@ client.on('message', async (msg) => {
           return await msg.channel.send(`Por favor não deixe em branco!`);
         }
 
-  /*       console.log(`${statusContent}`);
+        /*       console.log(`${statusContent}`);
 
         let statusTContent = msg.content.match(/"([^"]+)"/)[2].trim();
 
@@ -312,33 +309,32 @@ client.on('message', async (msg) => {
       }
       break;
 
-      case 'sts_t':
-        {
-          let roleCheck = await checkRole(msg);
-          if (roleCheck === 'noPerm') return;
-  
-  
-          if (!msg.content.match(/"([^"]+)"/)) {
-            return await msg.channel.send(
-              `Por favor digite a mensagem que será colocada no status no formato  "type"`,
-            );
-          }
-  
-          let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
-  
-          if (!statusTContent) {
-            return await msg.channel.send(`Por favor não deixe em branco!`);
-          }
+    case 'sts_t':
+      {
+        let roleCheck = await checkRole(msg);
+        if (roleCheck === 'noPerm') return;
 
-        console.log(typeof statusTContent)
-          client.user.setPresence({
-            status: 'online',
-            activity: {
-              type: `${statusTContent}`,
-            },
-          });
+        if (!msg.content.match(/"([^"]+)"/)) {
+          return await msg.channel.send(
+            `Por favor digite a mensagem que será colocada no status no formato  "type"`
+          );
         }
-        break;
+
+        let statusTContent = msg.content.match(/"([^"]+)"/)[1].trim();
+
+        if (!statusTContent) {
+          return await msg.channel.send(`Por favor não deixe em branco!`);
+        }
+
+        console.log(typeof statusTContent);
+        client.user.setPresence({
+          status: 'online',
+          activity: {
+            type: `${statusTContent}`,
+          },
+        });
+      }
+      break;
 
     case 'ptr':
     case 'pontuar':
